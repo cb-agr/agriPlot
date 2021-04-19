@@ -8,14 +8,12 @@ agriDemoPlot <- function(fieldBook,initialLong,initialLat,rowSpacing,plotLength,
   
   ###plotRow sums for SN/NS plantings - begin###
   #this code is accounting for SN/NS (i.e. vertical orientation) fields with different plotRows to calculate respective row spacing from a cumulative sum of plotRows 
-  fbSortSumsS_N <- ddply(fb, .(plotColumNum, plotRows), nrow)
+  fbSortSumsS_N <- ddply(fb, .(plotColumnNum, plotRows), nrow)
   fbSelectS_N <- fbSortSumsS_N[1:2]
-  setDT(fbSelectS_N)[, changeFromPrevious := shift(plotRows, fill = plotRows[1]) - plotRows]
-  fbSelectS_N$newPlotRows <- fbSelectS_N$plotRows + fbSelectS_N$changeFromPrevious
-  fbSelectS_N[1,4] <- 0
-  fbSumPlotRowsS_N <- data.frame(fbSelectS_N, plotRowSums=cumsum(fbSelectS_N$newPlotRows))
-  fbSumPLotRowsS_N_comb <- cbind(fbSumPlotRowsS_N[1:1],fbSumPlotRowsS_N[5:5])
-  fbS_N <- join(fb,fbSumPLotRowsS_N_comb,by="plotColumNum")
+  fbSelectS_N[1,2] <- 0
+  fbSumPlotRowsS_N <- data.frame(fbSelectS_N, plotRowSums=cumsum(fbSelectS_N$plotRows))
+  fbSumPLotRowsS_N_comb <- cbind(fbSumPlotRowsS_N[1:1],fbSumPlotRowsS_N[3:3])
+  fbS_N <- join(fb,fbSumPLotRowsS_N_comb,by="plotColumnNum")
   planterRowSpaceS_N <- rowSpacing*fbS_N$plotRowSums
   ###for SN/NS plantings - end###
   
@@ -23,11 +21,9 @@ agriDemoPlot <- function(fieldBook,initialLong,initialLat,rowSpacing,plotLength,
   #this code is accounting for EW/WE (i.e. horizontal orientation) fields with different plotRows to calculate respective row spacing from a cumulative sum of plotRows
   fbSortSumsE_W <- ddply(fb, .(plotRowNum, plotRows), nrow)
   fbSelectE_W <- fbSortSumsE_W[1:2]
-  setDT(fbSelectE_W)[, changeFromPrevious := shift(plotRows, fill = plotRows[1]) - plotRows]
-  fbSelectE_W$newPlotRows <- fbSelectE_W$plotRows + fbSelectE_W$changeFromPrevious
-  fbSelectE_W[1,4] <- 0
-  fbSumPlotRowsE_W <- data.frame(fbSelectE_W, plotRowSums=cumsum(fbSelectE_W$newPlotRows))
-  fbSumPLotRowsE_W_comb <- cbind(fbSumPlotRowsE_W[1:1],fbSumPlotRowsE_W[5:5])
+  fbSelectE_W[1,2] <- 0
+  fbSumPlotRowsE_W <- data.frame(fbSelectE_W, plotRowSums=cumsum(fbSelectE_W$plotRows))
+  fbSumPLotRowsE_W_comb <- cbind(fbSumPlotRowsE_W[1:1],fbSumPlotRowsE_W[3:3])
   fbE_W <- join(fb,fbSumPLotRowsE_W_comb,by="plotRowNum")
   planterRowSpaceE_W <- rowSpacing*fbE_W$plotRowSums
   ###for EW/WE plantings - end###
@@ -100,7 +96,7 @@ agriDemoPlot <- function(fieldBook,initialLong,initialLat,rowSpacing,plotLength,
   if(rowColDir == "WE-SN"){
     message("Analyzing rowColDir as WE-SN")
     iPlotLat <- initialLat + (planterRowSpaceE_W/r_earth) * (180/pi) 
-    iPlotLong <- initialLong + (plotLength/r_earth) * (180/pi)/cos(initialLat*pi/180) * (fbE_W$plotColumNum-1)
+    iPlotLong <- initialLong + (plotLength/r_earth) * (180/pi)/cos(initialLat*pi/180) * (fbE_W$plotColumnNum-1)
     diffLong <- iPlotLong - initialLong
     diffLat <- iPlotLat - initialLat
     fbE_W$initialLong <- initialLong
@@ -116,7 +112,7 @@ agriDemoPlot <- function(fieldBook,initialLong,initialLat,rowSpacing,plotLength,
   if(rowColDir == "WE-NS"){
     message("Analyzing rowColDir as WE-NS")
     iPlotLat <- initialLat + (-planterRowSpaceE_W/r_earth) * (180/pi) 
-    iPlotLong <- initialLong + (plotLength/r_earth) * (180/pi)/cos(initialLat*pi/180) * (fbE_W$plotColumNum-1)
+    iPlotLong <- initialLong + (plotLength/r_earth) * (180/pi)/cos(initialLat*pi/180) * (fbE_W$plotColumnNum-1)
     diffLong <- iPlotLong - initialLong
     diffLat <- iPlotLat - initialLat
     fbE_W$initialLong <- initialLong
@@ -132,7 +128,7 @@ agriDemoPlot <- function(fieldBook,initialLong,initialLat,rowSpacing,plotLength,
   if(rowColDir == "EW-SN"){
     message("Analyzing rowColDir as EW-SN")
     iPlotLat <- initialLat + (planterRowSpaceE_W/r_earth) * (180/pi) 
-    iPlotLong <- initialLong + (-plotLength/r_earth) * (180/pi)/cos(initialLat*pi/180) * (fbE_W$plotColumNum-1)
+    iPlotLong <- initialLong + (-plotLength/r_earth) * (180/pi)/cos(initialLat*pi/180) * (fbE_W$plotColumnNum-1)
     diffLong <- iPlotLong - initialLong
     diffLat <- iPlotLat - initialLat
     fbE_W$initialLong <- initialLong
@@ -148,7 +144,7 @@ agriDemoPlot <- function(fieldBook,initialLong,initialLat,rowSpacing,plotLength,
   if(rowColDir == "EW-NS"){
     message("Analyzing rowColDir as EW-NS")
     iPlotLat <- initialLat + (-planterRowSpaceE_W/r_earth) * (180/pi) 
-    iPlotLong <- initialLong + (-plotLength/r_earth) * (180/pi)/cos(initialLat*pi/180) * (fbE_W$plotColumNum-1)
+    iPlotLong <- initialLong + (-plotLength/r_earth) * (180/pi)/cos(initialLat*pi/180) * (fbE_W$plotColumnNum-1)
     diffLong <- iPlotLong - initialLong
     diffLat <- iPlotLat - initialLat
     fbE_W$initialLong <- initialLong
