@@ -4,7 +4,7 @@
 demoFieldBook <- function(beginRow,endRow,beginColumn,endColumn,plotRows){
   rows = beginRow:endRow
   cols = as.data.table(beginColumn:endColumn)
-  x <- apply(cols, 1, function(x) data.table(plotRowNum=rows,plotColumNum=x))
+  x <- apply(cols, 1, function(x) data.table(plotRowNum=rows,plotColumnNum=x))
   myRowCols = do.call(rbind,x)
   myRowCols$plotRows = plotRows
   myRowCols
