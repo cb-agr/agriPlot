@@ -4,14 +4,18 @@
 fbLLToSPDF <- function(fieldBookLL,coordRefSys){
 fbLL <- fieldBookLL # takes fieldBookLL as input agrument 
 if(coordRefSys == "default"){
-crdref <- CRS("+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs") # set user defined coordinate reference system. 
-fieldBookLLNewSp <- SpatialPoints(coords = cbind(fbLL$Longitude,fbLL$Latitude),crdref) # create SpatialPoints object
-spdf <- SpatialPointsDataFrame(fieldBookLLNewSp,fbLL) #create SpatialPointsDataFrame object
-spdf
+# set user defined coordinate reference system. 
+crdref <- CRS("+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs") 
+
+# create SpatialPoints object
+fieldBookLLNewSp <- SpatialPoints(coords = cbind(fbLL$Longitude,fbLL$Latitude),crdref) 
+
+#create SpatialPointsDataFrame object
+spdf <- SpatialPointsDataFrame(fieldBookLLNewSp,fbLL) 
 }else{
   crdref <- CRS(coordRefSys)
   fieldBookLLNewSp <- SpatialPoints(coords = cbind(fbLL$Longitude,fbLL$Latitude),crdref)
   spdf <- SpatialPointsDataFrame(fieldBookLLNewSp,fbLL)
-  spdf
 }
+return(spdf)
 }
