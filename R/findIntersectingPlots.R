@@ -8,7 +8,7 @@
 pivotPlotsIntersection <- function(fieldbookLL, pivotTracksLL,distance){
 fb <- fieldbookLL
 ptLL <- pivotTracksLL
-row.names(fb) <- paste("R", 1:nrow(fb), sep="") #add rownames to field book
+row.names(fb) <- paste("R", 1:nrow(fb), sep="") 
 fbLL <- cbind(fb$Longitude,fb$Latitude)
 message("Calculating distance matrix, this may take a minute or two. FYI, this may produce a very large matrix")
 gdist <- pointDistance(fbLL, ptLL, lonlat = TRUE) # pairwise distance matrix between fieldbook plot long/lat and pivot long/lat
@@ -20,5 +20,5 @@ v <- trackint[x, ] # organize boolean matrix rowname and colname
 iwc <- intersect(rownames(v), rownames(fb)) #intersection of pivot row with plot row
 rsc <- fb[rownames(fb) %in% iwc, ] #select plots that are within defined distance to pivot points 
 rsc$pivotIntersection <- "Yes" #fieldbook plots that intersect with pivot tracks
-rsc
+return(rsc)
 }

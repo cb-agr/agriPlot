@@ -1,7 +1,7 @@
 # req lib: library(rgeos)
-#fbSPDFBlockTests.R takes fieldBookLLSPDF as input and through a series of functions generates blocks from a user-specific blocking input through a minimumb bounding geometry convex hull algorithm implemented in regeos. 
+#fbSPDFBoundTests.R takes fieldBookLLSPDF as input and through a series of functions generates blocks from a user-specific blocking input through a minimumb bounding geometry convex hull algorithm implemented in regeos. 
 
-fbSPDFBlockTests <- function(fieldBookLLSPDF,blocking){
+fbSPDFBoundTests <- function(fieldBookLLSPDF,blocking){
 fieldBookLLSPDF <- fieldBookLLSPDF
 myBlocks <- blocking
 fieldBookLLSPDFSplit <- split(fieldBookLLSPDF,fieldBookLLSPDF[[myBlocks]], drop=FALSE)
@@ -10,6 +10,6 @@ fieldBookLLSPDFChull <- mapply(fieldBookLLSPDFChull, names(fieldBookLLSPDFChull)
                                FUN = function(x,y){x@polygons[[1]]@ID <- y
                                return(x)})
 fieldBookLLSPDFChull <- do.call(rbind,fieldBookLLSPDFChull)
-fbToChullSPDF <- SpatialPolygonsDataFrame(fieldBookLLSPDFChull, data.frame(Blocks = names(fieldBookLLSPDFChull)),match.ID = FALSE)
-fbToChullSPDF
+fbToChullSPDF <- SpatialPolygonsDataFrame(fieldBookLLSPDFChull, data.frame(blocks = names(fieldBookLLSPDFChull)),match.ID = FALSE)
+return(fbToChullSPDF)
 }
