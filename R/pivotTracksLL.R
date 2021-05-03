@@ -18,12 +18,7 @@ ptLat <- foreach(i=seq(0.5,360,0.5), .combine = 'cbind') %:% #calculate latitude
   }
 matLong <- matrix(ptLong, ncol=1) #transform matrix longitude values of pivot to a single column
 matLat <- matrix(ptLat, ncol=1) #transform matrix latitude values of pivot to a single column
-llcomb <- cbind(matLong, matLat) 
-if(matrix==TRUE){
-  llcomb # matrix of long/lat for each pivot span, this matrix will serve as input file for pivot_plots_intersection.R
-}else{
-llcombdf <- as.data.frame(llcomb) #create dataframe 
-names(llcombdf) <- c("Longitude",  "Latitude") 
-llcombdf # dataframe of long/lat for each pivot span, you may want this output to visualize pivot points in GIS software such as QGIS
-}
+llcomb <- as.data.frame(cbind(matLong, matLat))
+names(llcomb) <- c("Longitude",  "Latitude") 
+return(llcomb)
 }
