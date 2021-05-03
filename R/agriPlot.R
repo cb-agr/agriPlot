@@ -33,7 +33,7 @@ agriPlot <- function(fieldBook,initialLong,initialLat,rowSpacing,plotLength,rowC
   ######## long/lat calculations begin##############
   if(rowColDir == "SN-WE"){ # core piece of agriPlot to calculate long/lat for each plot, basically the same code throughout but accounts for rowColDir (i.e. planting direction). 
     message("Analyzing rowColDir as SN-WE") # calculations are geographic distance calculations with respect to earth's surface  
-    fbS_N$testNoRep <- gsub(" ", "", paste(fbS_N$testName,"_R",fbS_N$repNum))
+    fbS_N$testNameRep <- gsub(" ", "", paste(fbS_N$testName,"_R",fbS_N$repNum))
     iPlotLat <- initialLat + (plotLength/r_earth) * (180/pi) * (fbS_N$plotRowNum-1)
     iPlotLong <- initialLong + (planterRowSpaceS_N/r_earth) * (180/pi)/cos(initialLat*pi/180) 
     diffLong <- iPlotLong - initialLong
@@ -51,7 +51,7 @@ agriPlot <- function(fieldBook,initialLong,initialLat,rowSpacing,plotLength,rowC
   }
   if(rowColDir == "SN-EW"){
     message("Analyzing rowColDir as SN-EW")
-    fbS_N$testNoRep <- gsub(" ", "", paste(fbS_N$testName,"_R",fbS_N$repNum))
+    fbS_N$testNameRep <- gsub(" ", "", paste(fbS_N$testName,"_R",fbS_N$repNum))
     iPlotLat <- initialLat + (plotLength/r_earth) * (180/pi) * (fbS_N$plotRowNum-1)
     iPlotLong <- initialLong + (-planterRowSpaceS_N/r_earth) * (180/pi)/cos(initialLat*pi/180) 
     diffLong <- iPlotLong - initialLong
@@ -68,7 +68,7 @@ agriPlot <- function(fieldBook,initialLong,initialLat,rowSpacing,plotLength,rowC
   }
   if(rowColDir == "NS-WE"){
     message("Analyzing rowColDir as NS-WE")
-    fbS_N$testNoRep <- gsub(" ", "", paste(fbS_N$testName,"_R",fbS_N$repNum))
+    fbS_N$testNameRep <- gsub(" ", "", paste(fbS_N$testName,"_R",fbS_N$repNum))
     iPlotLat <- initialLat + (-plotLength/r_earth) * (180/pi) * (fbS_N$plotRowNum-1)
     iPlotLong <- initialLong + (planterRowSpaceS_N/r_earth) * (180/pi)/cos(initialLat*pi/180) 
     diffLong <- iPlotLong - initialLong
@@ -85,7 +85,7 @@ agriPlot <- function(fieldBook,initialLong,initialLat,rowSpacing,plotLength,rowC
   }
   if(rowColDir == "NS-EW"){
     message("Analyzing rowColDir as NS-EW")
-    fbS_N$testNoRep <- gsub(" ", "", paste(fbS_N$testName,"_R",fbS_N$repNum))
+    fbS_N$testNameRep <- gsub(" ", "", paste(fbS_N$testName,"_R",fbS_N$repNum))
     iPlotLat <- initialLat + (-plotLength/r_earth) * (180/pi) * (fbS_N$plotRowNum-1)
     iPlotLong <- initialLong + (-planterRowSpaceS_N/r_earth) * (180/pi)/cos(initialLat*pi/180) 
     diffLong <- iPlotLong - initialLong
@@ -102,7 +102,7 @@ agriPlot <- function(fieldBook,initialLong,initialLat,rowSpacing,plotLength,rowC
   }
   if(rowColDir == "WE-SN"){
     message("Analyzing rowColDir as WE-SN")
-    fbE_W$testNoRep <- gsub(" ", "", paste(fbE_W$testName,"_R",fbE_W$repNum))  
+    fbE_W$testNameRep <- gsub(" ", "", paste(fbE_W$testName,"_R",fbE_W$repNum))  
     iPlotLat <- initialLat + (planterRowSpaceE_W/r_earth) * (180/pi) 
     iPlotLong <- initialLong + (plotLength/r_earth) * (180/pi)/cos(initialLat*pi/180) * (fbE_W$plotColumnNum-1)
     diffLong <- iPlotLong - initialLong
@@ -119,7 +119,7 @@ agriPlot <- function(fieldBook,initialLong,initialLat,rowSpacing,plotLength,rowC
   }
   if(rowColDir == "WE-NS"){
     message("Analyzing rowColDir as WE-NS")
-    fbE_W$testNoRep <- gsub(" ", "", paste(fbE_W$testName,"_R",fbE_W$repNum))  
+    fbE_W$testNameRep <- gsub(" ", "", paste(fbE_W$testName,"_R",fbE_W$repNum))  
     iPlotLat <- initialLat + (-planterRowSpaceE_W/r_earth) * (180/pi) 
     iPlotLong <- initialLong + (plotLength/r_earth) * (180/pi)/cos(initialLat*pi/180) * (fbE_W$plotColumnNum-1)
     diffLong <- iPlotLong - initialLong
@@ -136,7 +136,7 @@ agriPlot <- function(fieldBook,initialLong,initialLat,rowSpacing,plotLength,rowC
   }
   if(rowColDir == "EW-SN"){
     message("Analyzing rowColDir as EW-SN")
-    fbE_W$testNoRep <- gsub(" ", "", paste(fbE_W$testName,"_R",fbE_W$repNum))  
+    fbE_W$testNameRep <- gsub(" ", "", paste(fbE_W$testName,"_R",fbE_W$repNum))  
     iPlotLat <- initialLat + (planterRowSpaceE_W/r_earth) * (180/pi) 
     iPlotLong <- initialLong + (-plotLength/r_earth) * (180/pi)/cos(initialLat*pi/180) * (fbE_W$plotColumnNum-1)
     diffLong <- iPlotLong - initialLong
@@ -153,7 +153,7 @@ agriPlot <- function(fieldBook,initialLong,initialLat,rowSpacing,plotLength,rowC
   }
   if(rowColDir == "EW-NS"){
     message("Analyzing rowColDir as EW-NS")
-    fbE_W$testNoRep <- gsub(" ", "", paste(fbE_W$testName,"_R",fbE_W$repNum))  
+    fbE_W$testNameRep <- gsub(" ", "", paste(fbE_W$testName,"_R",fbE_W$repNum))  
     iPlotLat <- initialLat + (-planterRowSpaceE_W/r_earth) * (180/pi) 
     iPlotLong <- initialLong + (-plotLength/r_earth) * (180/pi)/cos(initialLat*pi/180) * (fbE_W$plotColumnNum-1)
     diffLong <- iPlotLong - initialLong
