@@ -1,24 +1,41 @@
-# agriPlot
 
-Practical geospatial tools for agricultural field research planning and analysis
 
-## What is agriPlot? 
+# <img src="/Users/christopherbach/OneDrive/Development/agriPlot/Images/plotsNS.png" alt="N/S Plots" style="height:30px">agriPlot <img src="/Users/christopherbach/OneDrive/Development/agriPlot/Images/plotsEW.png" alt="E/W Plots" style="height:25px">
 
-The core R function of agriPlot (i.e. agriPlot.R) takes a fieldbook comprising an agricultural research experiment with a row column design and computes a latitude and longitude for each plot (i.e. entry) represented in the fieldbook. Once geographical coordinates are assigned to individual plots, agriPlot has numerous easy-to-use R functions for downstream analysis and visualization of a users field experiment. For instance, users may find agriPlot useful for evaluating the layout of their respective trial against satellite imagery or generate a map to bring to the field with them to mark field boundaries. agriPlot does NOT design agricultural field experiments. That’s left up to the user.
+agriPlot is a suite of practical geospatial tools for agricultural field research planning and analysis
 
-## What is a fieldBook?
+## What is agriPlot?
 
-A fieldbook represents some agricultural field research experiment wherein the row and column for every plot has a corresponding test or treatment and may also contain any other important attribute. A row column design can practically be thought of as a coordinate system to delineate tests or treatments being evaluated and it is also commonly used to navigate research fields. In theory, agriPlot can accept any agricultural field research design so long as it is in a row column format. From there, if the initial latitude and longitude is known for the plot in row 1 and column 1, the remaining coordinates for every plot can be calculated using a handful of other inputs. Once we know all of the plot coordinates, many geospatial operations can be carried out for subsequent analysis. 
+The core R function of agriPlot (i.e. agriPlot) takes a fieldbook that is comprised of an agricultural research experiment and computes longitude and latitude coordinates for each individual plot. Once geographical coordinates are assigned to individual plots, the general idea behind agriPlot is to provide users with easy-to-use functions for geospatial visualization and analyses of a user's field experiment. For instance, let's say you're planting a trial at a new site. agriPlot can help vizualize various placements of a field trial to identify an ideal planting area or generate a map to help ground truth field boundaries. agriPlot even has functions to help with more complicated tasks such as accurately planting border/filler in pivot tracks. The first step in any successful field trial is designing a valid experimental design while the second step is proper implementation and planting of said design. The second step is where agriPlot seeks to aide users. So agriPlot does **NOT** design agricultural field experiments. That’s left up to the user.
+
+## What is a fieldbook?
+
+A fieldbook represents some agricultural field research experiment wherein the row and column for every plot has a corresponding treatment and/or test and may also contain any other important attribute. agriPlot should be able to accept any agricultural field research design (i.e. randomized complete block, incomplete block, augmented design, etc.) so long as each plot has a row and column value. 
 
 ## Accuracy
 
-The analysis performed by all the functions is very accurate. However, when using this program, it should be important that results are ground-truthed before final implementation of a field design. 
+The analysis performed by all the functions is accurate. However, when using this program, it should be important that results are ground-truthed before final implementation of a field trial design. 
 
 ## Documentation
 
-#### fieldBook input:
+General Workflow
 
-Your fieldbook input can have any number of attributes but there are a handful of header names that are **essential** for agriPlot to work.
+```mermaid
+graph TD;
+fieldBook -->agriPlot;
+agriPlot -->fieldBookLL;
+fieldBookLL --> fbLLPlotLeaflet;
+fieldBookLL --> findIntersectingPlots;
+fieldBookLL --> fbLLToSPDF;
+fbLLToSPDF --> fbSPDFBlocks;
+fbLLToSPDF --> fbSPDFBoundGeom;
+```
+
+
+
+#### <u>fieldBook input:</u>
+
+Your fieldbook input can have any number of attributes but there are a handful of header names that are **essential** for agriPlot to work. 
 
 plotRowNum: contains your fieldbook row numbers associated with each respective plot. Must be an integer.
 
@@ -28,40 +45,47 @@ plotColumnNum: contains your fieldbook column numbers associated with each respe
 
 - Columns always go in the **Longitudinal** or **X** direction
 
-plotRows: this is the number of rows per plot. This might be a 2-row, 4-row or 6-row plot, etc. agriPlot.R can handle any combination of plotRows for a field. Must be an integer.
-testName: corresponding name of the test or treatment associated with the row/column you're evaluating. A testName for instance might called highProtein, representing soybean lines you're evalauting. Please don't allow for any whitespace in the testName. Can be numeric, character or alphanumeric. 
-repNum: the rep number associated with the testName (i.e. 1,2,3). Must be integer. 
-block: block associated with each testName. If not applicable to your field design include the header but leave column blank.  
+plotRows: this is the number of rows per plot. This might be a 2-row, 4-row or 6-row plot, etc. A fieldBook can have multiple plotRows. 
 
-argiPlot.R
+testName: corresponding name of the test associated with the row/column you're evaluating. Please don't allow for any whitespace in the testName. Can be numeric, character or alphanumeric. 
+
+repNum: the replication number associated with the testName (i.e. 1,2,3). Must be an integer. 
+
+block: block associated with each testName.
+
+id: some unique identifier for each plot. Can be numeric, character or alphanumeric (i.e. 101,102,103 or plot101,plot102,plot103)
+
+#### <u>argiPlot</u>
 
 **Description**
 
-agriPlot.R is the core function that serves as input for all of the other functions outlined here. The input is a user fieldBook with specified header names. Users just have to enter a handful of inputs and agriPlot.R will calculate a latitude and longitude for each plot in your fieldBook.
+agriPlot is the core function that serves as input for all of the other functions outlined here. The input is a user fieldBook with specified header names. Users just have to enter a handful of inputs and agriPlot.R will output a latitude and longitude for each plot in your fieldBook. This output will be referred to as fieldBookLL.  
 
-**usage**
+**Usage**
 
 ```R
 agriPlot(fieldBook,initialLong,initialLat,rowSpacing,plotLength,rowColDir,plantingAngle)
 ```
 
 **Arguments**
-fieldBook: either dataframe or datatable. fieldBook must have necessary header names.
+fieldBook: either data.frame or data.table. fieldBook must have necessary header names.
 initialLong: the Longitude for the plot in column 1 and row 1.
 initialLat: the Latitude for the plot in column 1 and row 1.
 rowSpacing: this is the row spacing of your planter in **meters** (15 inch planter spacing = 0.381 meters, 30 inch planter spacing = 0.762 meters).  
-plotLength: this is the **total** length of your plot in **meters**. This includes the planted portion of the plot and the alley (if an alley is applicable).
-rowColDir: this is the row and column orientation of your field. I apologize as this is probably the most confusing part of the function, but let me explain.
+plotLength: this is the <u>**total**</u> length of your plot in **meters**. This includes the planted portion of the plot and the alley (if an alley is applicable).
+rowColDir: this is the row and column orientation of your field.This is probably the most confusing part of the function, but let me explain.
 
 For North/South plantings:
-The first two letters before the hyphen represent the row direction in which your row numbers are increasing. The second two letters following the hyphen represent represents the column direction in which your column numbers are increasing. The are one of four North/South planting inputs to choose from.
+The first two letters before the hyphen represent the row direction in which your row numbers are increasing. The second two letters following the hyphen represent represent the column direction in which your column numbers are increasing. There are one of four North/South planting inputs to choose from.
 
 - SN-WE – row numbers increase from South to North and column numbers increase from West to East
 - SN-EW – row numbers increase from South to North and column numbers increase from East to West
-- NS-WE – row numbers increase from North to South column numbers increase from West to East
+- NS-WE – row numbers increase from North to South and column numbers increase from West to East
 - NS-EW – row numbers increase from North to South and column numbers increase from East to West 
 
-![Planting](/Users/christopherbach/Downloads/row_col_SNWE.svg "SN-WE planting")
+
+
+<img src="/Users/christopherbach/OneDrive/Development/agriPlot/Images/row_col_SNWE.svg" alt="SN-WE" style="height:500px">
 
 For East/West plantings:
 The first two letters before the hyphen represent the column direction in which your column numbers are increasing. The second two letters following the hyphen represent represents the row direction in which your row numbers are increasing. The are one of four East/West inputs to choose from.
@@ -71,18 +95,24 @@ The first two letters before the hyphen represent the column direction in which 
 - EW-SN – column numbers increase from East to West and row numbers increase from South to North
 - EW-NS – column numbers increase from East to West and row numbers increase from North to South
 
-plantingAngle: The angle you planted at. Values greater than 0 rotate your field in a counterclockwise direction and values less than 0 rotate your field in a clockwise direction. If you planted "perfectly" vertical or horizontal then your plantingAngle is 0. I recommend using calcPlantingAngle.R to find your planting angle. 
+<img src="/Users/christopherbach/OneDrive/Development/agriPlot/Images/ew_sn_agriplot.svg" alt="EW-SN" width=500px height=500px>
+
+plantingAngle: The angle you planted at. Values greater than 0 rotate your field in a counterclockwise direction and values less than 0 rotate your field in a clockwise direction. If you planted "perfectly" vertical or horizontal then your plantingAngle is 0. I recommend using calcPlantingAngle.R to find your planting angle if you don't know it. 
 
 Examples:
 
 ```R
-fbLL <- agriplot(my2021FieldBook,-98.13135,40.89407,0.762,4,"SN-WE",0)
+fbLL <- agriplot(my2021FieldBook,-98.13135,40.89407,0.762,4,"WE-NS",0)
 ```
 
-demoFieldBook.R:
+Example agriPlot output fieldBook output with Long/Lat computed for each plot. Point coordinates representing each plot within a fieldBook were plotted in QGIS with a satellite imagery base layer.  
+
+<img src="/Users/christopherbach/OneDrive/Development/agriPlot/Images/fieldplotpic.png" alt="FieldPlotPic" height=400px>
+
+#### <u>demoFieldBook</u>:
 
 **Description**
-    Generates a simple "demo" fieldbook from a specified number of rows, columns and plot rows. In 	some instances a user may not have a fieldbook quite yet prepared for the season but still may want the option for a preliminary visualization their field trial layout. The output of this function is only intended to be used with agriDemoplot.R (explained after this function).
+    Generates a simple "demo" fieldbook from a specified number of rows, columns and plot rows. In 	some instances a user may not have a fieldbook quite yet prepared for the season but still may want the option for a preliminary visualization their field trial layout. The output of this function is only intended to be used with agriDemoplot (explained after this function).
 
 **Usage**
 
@@ -90,11 +120,13 @@ demoFieldBook.R:
 demoFieldBook(beginRow,endRow,beginColumn,endColumn,plotRows)
 ```
 
-beginRow: the row value you wish to start at. Must be integer.
-endRow: the row value you wish to end at. Must be integer.
-beginColumn: the column value you wish to start at. Must be integer.
-endColumn: the column value you wish to end at. Must be integer.
-plotRows: number of plots per row associated with the specified rows and columns. Must be integer.
+**Arguments**
+
+beginRow: the row value you start at. Must be an integer.
+endRow: the row value you end at. Must be an integer.
+beginColumn: the column value you start at. Must be an integer.
+endColumn: the column value you end at. Must be an integer.
+plotRows: number of plots per row associated with the specified rows and columns. Must be an integer.
 
 **Examples**
 
@@ -102,18 +134,18 @@ plotRows: number of plots per row associated with the specified rows and columns
 demoFB <- demoFieldBook(1,50,1,18,2)
 ```
 
-Handling multiple plotRows:
+Multiple plotRows:
 
 ```R
 demoFBList <- list(A=demoFieldBook(1,50,1,6,2),B=demoFieldBook(1,50,7,12,4),C=demoFieldBook(1,50,13,18,2))
 demoFB <- do.call(rbind,demoFBList)
 ```
 
-#### agriDemoPlot.R
+#### <u>agriDemoPlot</u>
 
 **Description**
 
-agriDemoplot.R is virtually the same function as agriPlot.R, however, it's only meant to take a fieldbook generated from demoFieldBook.R as input. agriDemoplot.R can take the output from demoFieldBook.R as is. To limit redundancy in the README please refer agriPlot.R for explaination of the agrguments. 
+agriDemoplot.R is virtually the same function as agriPlot.R, however, it's only meant to take a fieldbook generated from demoFieldBook as input. agriDemoplot can take the output from demoFieldBook as is. To limit redundancy in the README please refer agriPlot for explaination of the agruments. 
 
 **Usage**
 
@@ -124,15 +156,16 @@ agriDemoPlot(fieldBook,initialLong,initialLat,rowSpacing,plotLength,rowColDir,pl
 **Examples**
 
 ```R
-demoFB <- demoFieldBook(1,50,1,18,2)
+demoFBList <- list(A=demoFieldBook(1,50,1,6,2),B=demoFieldBook(1,50,7,12,4),C=demoFieldBook(1,50,13,18,2))
+demoFB <- do.call(rbind,demoFBList)
 demoFBLL <- agriDemoPlot(demoFB,-98.13135,40.89407,0.762,4,"SN-WE",0)
 ```
 
-fbLLPlotLeaflet.R
+#### <u>fbLLPlotLeaflet</u>
 
 **Description**
 
-fbLLPlotLeaflet.R is a simple function that takes the output of agriPlot.R or agriDemoPlot.R and plots the latitude and longitude points against satellite imagery using Leaflet. This function is meant for quick and easy viewing of your plot points.
+fbLLPlotLeaflet is a simple function that takes the output of agriPlot.R or agriDemoPlot.R and plots the latitude and longitude points against satellite imagery using Leaflet. This function is meant for quick and easy viewing of your plot points.
 
 **Usage**
 
@@ -148,66 +181,101 @@ fieldBookLL: fieldBook with Latitude and Longitude for plots
 
 ```R
 leafletPlot <- fbLLPlotLeaflet(fieldBookLL)
+leafletPlot
 ```
 
-The next two functions assist with identifying row columns in your fieldbook that intersect with center pivot tracks. Mapping a field into pivot tracks can be challenging but these functions can help with determining where to place filler/border in pivot tracks. Use these functions in the order described. 
+Example output:
 
-pivotTracksLL.R
+
+
+<img src="/Users/christopherbach/OneDrive/Development/agriPlot/Images/leaflet_plotPic.png" alt="Leaflet plot pic" width=500px>
+
+
+
+#### <u>pivotTracksLL</u>
 
 **Description**
 
-This function takes the radius of each center pivot track (i.e. span), the Longitude of the center pivot and the latitude of the center pivot and calculates latitude and longitude points for each respective track. Assumes center pivot is a 360 degree circle.
+This function takes the radius of each center pivot track, the Longitude and Latitude of the center pivot and calculates latitude and longitude points for each respective track. Assumes center pivot is a 360 degree circle. Can be used as input for findIntersectingPlots to determine which plots intersect with pivot tracks.
 
 **Usage**
 
 ```R
-pivotTracksLL(radin, cpLong, cpLat, matrix=TRUE)
+pivotTracksLL(radin, cpLong, cpLat)
 ```
 
 **Arguments**
 
-radin: is the radius of each track in meters. Values can be stored using e.g.: c(54.577,103.475,152.119,200.906,263.136,325.574,387.55) where each comma separated value represents a track radius. Radius measurements for radin should be taken as close as possible to the center of the pivot stop and to the end of each respective track 
-cpLong: this is longitude coordinate for the center pivot. Should be taken right at the very center of the pivot stop. 
-cpLat: this is latitude coordinate for the center pivot. Should be taken right at the very center of the pivot stop.
-matrix = TRUE: specifying matrix = TRUE will serve as the input for pivotPlotsIntersection.R. However, if you want to view your pivot track points against satellite imagery to check their accuracy use matrix = FALSE, this will output a dataframe. 
+radin: is the radius of each pivot track in <u>**meters**</u>. Values can be stored using e.g.: c(54.577,103.475,152.119,200.906,263.136,325.574,387.55) where each comma separated value represents a track radius. Radius measurements for radin should be taken as close as possible to the center of the pivot stop and to the end of each respective track. 
+cpLong: This is longitude coordinate for the center pivot. Should be taken right at the very center of the pivot stop. 
+cpLat: This is latitude coordinate for the center pivot. Should be taken right at the very center of the pivot stop.
 
 **Examples**
 
+Output pivot tracks:
+
 ```R
-pivotLL <- pivotTracksLL(c(54.577,103.475,152.119,200.906,263.136,325.574,387.55), -98.13135,40.89407, matrix=TRUE)
+pivLL <- pivotTracksLL(c(55,109.5,163.249,217.919,272.5,326.718),-96.45504366,41.18194751)
 ```
 
-pivotPlotsIntersection.R
+Example output of pivot track point coordinates (in green) plotted using QGIS 
+
+<img src="/Users/christopherbach/OneDrive/Development/agriPlot/Images/pivot_tracks.png" alt="pivot tracks" width=450px>
+
+#### <u>findIntersectingPlots.R</u>
 
 **Description**
 
-pivotPlotsIntersection.R takes the output from agriPlot.R and pivot track points from pivotTracksLL.R and returns plots that intersect with pivot tracks based a user-defined distance. The output from pivotPlotsIntersection.R is basically a subset of your fieldBook plots that intersect with pivot tracks.
+findIntersectingPlots.R takes a fieldBookLL (i.e. output from agriPlot) and a given set of coordinates (i.e. pointsOfInterest) and outputs intersecting plots at a user-specified distance. 
 
 **Usage**
 
 ```R
-pivotPlotsIntersection(fieldbookLL,pivotTracksLL,distance)
+findIntersectingPlots(fieldBookLL,pointsOfInterest,distance)
 ```
 
 **Arguments**
 
-fieldbookLL: agriPlot.R fieldBook output with Longitiude and Latitude for each plot 
-pivotTracksLL: pivot track points output from pivotTracksLL.R.
-distance: the distance threshold in meters for where a plot intersects with a pivot point.  
+fieldbookLL: agriPlot fieldBook output with Longitiude and Latitude for each plot 
+pointsOfInterest: Longitude and Latitude coordinates for points of interest.
+distance: the distance threshold in **meters** for where a plot intersects with a points of interest. Plots that have a distance less than the threshold are "intersecting".
 
 **Examples**
 
-```R
-fbLLintersection <- pivotPlotsIntersection(fbLL,pivotLL,3)
-```
+Basic usage:
 
 ```R
-fbLL <- agriplot(my2021FieldBook,-98.13135,40.89407,0.762,4,"SN-WE",0)
-pivotLL <- pivotTracksLL(c(54.577,103.475,152.119,200.906,263.136,325.574,387.55), -98.13135,40.89407, matrix=TRUE)
-fbLLintersection <- pivotPlotsIntersection(fbLL,pivotLL,3)
+fbLLintersection <- findIntersectingPlots(fbLL,pivotLL,3)
 ```
 
-fbLLToSPDF.R
+For starters, any set of pointsofInterest can be used. But in the following example we'll demonstrate how to use the function to find plots that intersect with pivot tracks. 
+
+```R
+agD <- demoFieldBook(1,60,1,37,4)
+agDLL <- agriDemoPlot(agD,-96.4535927,41.1819774,0.762,4,"SN-WE",0)
+pivLL <- pivotTracksLL(c(55,109.5,163.249,217.919,272.5,326.718),-96.45504366,41.18194751)
+myInt <- pivotPlotsIntersection(agDLL,pivLL,3)
+```
+
+Pivot tracks (in green), fieldBook plots (in brown) and plots intersecting with pivot tracks (in red)
+
+<img src="/Users/christopherbach/OneDrive/Development/agriPlot/Images/plots_intersecting_pivot.png" alt="Pivot tracks intersection" width=450px height=400px>
+
+Plots intersecting with pivot tracks:
+
+<img src="/Users/christopherbach/OneDrive/Development/agriPlot/Images/plots_only_intersect.png" alt="Pivot tracks intersection" width=300px height=400px>
+
+In this example, maybe you've mapped a drainage pattern (in pink) and would like to plant a border in that area. 
+
+<img src="/Users/christopherbach/OneDrive/Development/agriPlot/Images/drainage_field.png" alt="Drainage pattern and field plots" height=400px>
+
+
+
+Intersecting plots:
+
+<img src="/Users/christopherbach/OneDrive/Development/agriPlot/Images/drainage_intersection.png" alt="Plots that intersect with drainage" height=400px>
+
+#### <u>fbLLToSPDF.R</u>
 
 **Usage**
 
@@ -216,12 +284,18 @@ fbLLToSPDF(fieldBookLL,coordRefSys)
 ```
 
 **Description**
-This function takes a fieldBook containing Long/Lat (output from agriPlot.R) and converts it to a Spatial Points Data Frame (i.e.SDPF) using the library sp. This is an important transition in the workflow as the fieldBook is now a spatial object, which allows for more advanced spatial analysis/operations to be exectuted. 
+This function takes a fieldBookLL and converts it to a Spatial Points Data Frame (i.e.SDPF) using the library sp. This is an important transition in the workflow as the fieldBook is now a spatial object. This allows for more advanced spatial analysis/operations to be exectuted. 
 
 **Arguments**
 
 fieldBookLL: agriPlot.R fieldBook output with Longitiude and Latitude for each plot
-coordRefSys: this the coordinate reference system (CRS) you wish to assign to your Spatial Points Data Frame. Setting coordRefSys = "default" sets the CRS to "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs". Otherwise users can enter any valid CRS.
+coordRefSys: this the coordinate reference system (CRS) you wish to assign to your Spatial Points Data Frame. 
+
+Using coordRefSys = "default" sets the CRS to:
+
+ 	"+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs"
+
+Otherwise, users can enter any valid CRS.
 
 **Examples**
 
@@ -232,71 +306,222 @@ fbSPDF <- fbLLToSPDF(my2021FBLL,coordRefSys="default")
 Example using other CRS:
 
 ```R
-fbSPDF <- fbLLToSPDF(my2021FBLL,coordRefSys="EPSG:1999")
+fbSPDF <- fbLLToSPDF(my2021FBLL,coordRefSys="EPSG:3857") # WGS84 / Psuedo-Mercator
 ```
 
-fbSPDFBoundGeom.R
+#### <u>fbSPDFBoundField.R</u>
 
 **Description**
 
-this is a fairly simple function that takes a fieldBook Spatial Points Data Frame and runs it through a minimum bounding geometry function to create a field boundary.
+This function takes a fieldBook Spatial Points Data Frame and computes a rectangular polygon that encloses all fieldBook points.
 
 **Usage**
 
 ```R
-fbSPDFBoundGeom(fieldBookLLSPDF)
+fbSPDFBoundField(fieldBookLLSPDF)
 ```
+
+**Arguments**
+
+fieldBookLLSPDF: fieldBook Spatial Points Data Frame
+
+**Examples**
+
+Basic:
+
+```R
+fbBoundGeom <- fbSPDFBoundField(fbSPDF)
+```
+
+Additional examples:
+
+```R
+read.csv <- "agriPLot_fb_sample.csv"
+sampleNLL <- agriPlot(sample,-96.4106204,41.1467745,0.762,4,0,"SN-WE")
+fbSPDF <- fieldBookLLToSPDF(agDLL, coordRefSys = "default")
+fbBoundGeom <- fbSPDFBoundField(fbSPDF)
+#write shapefile
+shapefile(fbBoundGeom,"myfieldboundary")
+```
+
+Plot boundary using "plot" in R. 
+
+```R
+plot(fbBoundGeom,axes=TRUE)
+```
+
+<img src="/Users/christopherbach/OneDrive/Development/agriPlot/Images/fbboundaryoutput.png" alt="Field Boundary" height=300px>
+
+Field boundary with plot points.
+
+```R
+#add plot points
+points(fbBoundGeom,cex=0.25)
+```
+
+
+
+<img src="/Users/christopherbach/OneDrive/Development/agriPlot/Images/fieldbook_boundary_with_points.png" alt="fieldbook boundary with plot points" height=300px>
+
+Field boundary shapefile vector in QGIS:
+
+<img src="/Users/christopherbach/OneDrive/Development/agriPlot/Images/field_boundaries.png" alt="field boundary in QGIS" height=300px>
+
+#### <u>fbSPDFBoundTests.R</u>
+
+**Usage**
+
+```R
+fbSPDFBoundTests(fieldBookLLSPDF,field)
+```
+
+**Description**
+
+This function computes a polygon boundary that encloses each feature (i.e. testNoRep or block) in a fieldBookLLSPDF from a user-specified field. The output of this function is a SpatialPolygonsDataFrame. The names features of the SpatialPolygonsDataFrame are called "blocks".
 
 **Arguments**
 
 fieldBookLLSPDF: fieldBook as Spatial Points Data Frame
+field: field to bound
+
+**Example**
+
+```R
+myBlocks <- fbSPDFBoundTests(fieldBookLLSPDF,"testNoRep")
+```
+
+Below we'll use "agriPLot_fb_sample.csv" as an example to further demonstrate this function.
+
+```R
+myFb <- read.csv("agriPLot_fb_sample.csv")
+myFBLL <- agriPlot(sample,-96.4944759,41.1636251,0.762,4,"SN-WE",0)
+mySPDF <- fbLLToSPDF(myFBLL,"default")
+#important step: remove filler/border plots!!!
+mySPDFNoB <- fbSPDFRemoveBorder(mySPDF,"Border")
+myTests <- fbSPDFBoundTests(mySPDFNoB,"testNameRep") #bound with "testNoRep"
+#write shapefile
+shapefile(myTests,"myTests")
+#plot result in R
+plot(myTests, asp=-1,axes=TRUE)
+#Note! In order to add text to the map you must use "blocks"
+text(myTests,"blocks",cex=0.5)
+```
+
+In the plot below, each test is it's own repsective polygon feature. It's a nice visual representation of your field trial.  
+
+<img src="/Users/christopherbach/OneDrive/Development/agriPlot/Images/block_tests_example.png" alt="fieldBook Blocking example" height=500px>
+
+
+
+Shapefile vector in QGIS:
+
+<img src="/Users/christopherbach/OneDrive/Development/agriPlot/Images/fieldbook_blocks_QGIS.png" alt="fieldBook with blocked tests" height=500px>
+
+#### <u>agriPlotDim.R</u>
+
+**Description**
+
+Displaying a plot as one point has some shortcommings because it doesn't account for the entire dimensions of a plot. If this is of interest, users can compute a longitude and latitude for all four corners of a plot's dimensions using agriPlotDim.R.  It should be noted that the output of this function only contains the following headers: 
+
+**Usage**
+
+```R
+agriPlotDim(fieldBookLL,buffer)
+```
+
+**Arguments**
+
+fieldBookLL: fieldbook output from agriPlot with longitude and latitude for each plot
+buffer: plot dimension multiplier from > 0 to 1. You can think of this as how much of the plot dimensions do you want to include. A value of 1 would be the entire plot dimensions. Sometimes it's nice to use 0.8 to roughly account for the alley space of a plot. 
 
 **Examples**
 
 ```R
-fbBoundGeom <- bSPDFBoundGeom(fbSPDF)
+myFBDim <- agriPlotDim(fbLL,0.8)
 ```
 
-fbSPDFBoundGeom.R
-
-**Usage**
+We can enclose the boundaries of each plot using fbSPDFBoundTests.R
 
 ```R
-fbSPDFBoundGeom(fieldBookLLSPDF,blocking)
+myFb <- read.csv("agriPLot_fb_sample.csv")
+myFBLL <- agriPlot(myFb,-96.4944759,41.1636251,0.762,4,"SN-WE",0)
+myFBDim <- agriPlotDim(fbLL,0.8)
+dimSPDF <- fbLLToSPDF(apLLBuff,"default")
+plotBounds <- fbSPDFBoundTests(dimSPDF,"id")
+plot(plotBounds)
 ```
 
-**Description**
+R plot: each rectangle here is a plot in the fieldBook. 
 
-This function computes a polygon for each test/block in your fieldBook using a specified blocking criteria.  
+<img src="/Users/christopherbach/OneDrive/Development/agriPlot/Images/plot_bounds.png" alt="plot bounds" height=400px>
 
-**Arguments**
+Plot bounds in QGIS:
 
-fieldBookLLSPDF: fieldBook as Spatial Points Data Frame
-blocking: field to block by
+<img src="/Users/christopherbach/OneDrive/Development/agriPlot/Images/plot_bounds_qgis.png" alt="plot bounds in QGIS" height=400px>
 
-**Usage**
+#### Additional examples and geospatial analysis: 
 
-myBlocks <- fbSPDFBoundGeom(fieldBookLLSPDF,"testNoRep")
+The following examples demonstrate how you can utilize your field boundary or test boundaries as a masking layer to extract information from a raster dataset. In this instance, we'll be using an EC (i.e. apparent soil electrical conductivity) map* for a field as our input raster. However, any raster dataset (e.g. NDVI, yield map, etc.) could be used.
 
-agriPlotBuffer.R
-
-**Description**
-
-For a slightly more accurate representation of a field trial we can compute a longitude and latitude for all four corners of a plot's demensions using agriBufferPlot.R.
-
-**Usage**
+EC Deep map:
 
 ```R
-agriPlotBuffer(fieldBookLL,buffer)
+myECD <- raster("ECDeep.tif")
+plot(myECD,axes=TRUE)
+title("EC Deep (mS/m)")
 ```
 
-**Arguments**
 
-fieldBookLL: fieldbook output from agriPlot.R with longitude and latitude for each plot
-buffer: value from > 0 to 1 to add dimensions to plot longitude and latitude
 
-**Examples**
+<img src="/Users/christopherbach/OneDrive/Development/agriPlot/Images/ec_deep_map.png" alt="EC Deep Map" height=500px>
+
+Add field boundary (i.e. output from fbSPDFBoundGeom.R):
 
 ```R
-myFBBuffer <- agriPlotBuffer(fbLL,0.8)
+plot(myFieldBoundary,add=TRUE)
 ```
+
+
+
+<img src="/Users/christopherbach/OneDrive/Development/agriPlot/Images/ec_deep_w_field_boundary.png" alt="EC Deep with field boundary" height=500px>
+
+Mask raster with field boundary layer:
+
+```R
+fieldMask <- mask(myECD,myBounds)
+plot(fieldMask,axes=TRUE)
+plot(myBounds,add=TRUE)
+```
+
+<img src="/Users/christopherbach/OneDrive/Development/agriPlot/Images/my_boundary_ec_mask.png" alt="EC Mask Layer" height=500px>
+
+```R
+plot(myTests,asp=-1,axes=TRUE)
+plot(fieldMask,add=TRUE)
+plot(myTests,add=TRUE)
+text(myTests,"Blocks",cex=0.5)
+title("EC Deep (mS/m) and Field Tests")
+```
+
+<img src="/Users/christopherbach/OneDrive/Development/agriPlot/Images/ec_mask_with_test_blocks.png" alt="Mask Layer with test blocks" height=500px>
+
+**Make a raster plot with yield data**
+
+Let's say it is the end of the season and you have yield values for all of your plots. We can rasterize the yield data to make a simple yield map of the field. By rasterizing the dataset we're taking discrete point values, in this case yield, and converting it to a coninuous geospatial value. I'll be using the file agriPLot_fb_samplev2_yield.csv as an example. A map like this is probably only useful for visualization of any spatial variability in the field. For instance, maybe you had a pest or weed issue or poor irrigation uniformity and wanted to see if these events contributed to any broad spatial differences in yield across the field.  
+
+```R
+fbYield <- read.csv("agriPLot_fb_samplev2_yield.csv")
+myFBLL <- agriPlot(fbYield,-96.4944759,41.1636251,0.762,4,"SN-WE",0)
+myFBLLSPDF <- fbLLToSPDF(myFBLL,"default")
+#remove border, it's just easier and you probably don't care the yield anyways
+myFBLLSPDFNOB <- fbSPDFRemoveBorder(myFBLLSPDF,"Border")
+#ncol and nrow is the number of columns and rows in your fieldbook
+r <- raster(myFBLLSPDFNF, ncol=58,nrow=64, crs="+proj=utm +zone=18 +datum=WGS84 +units=m +no_defs")
+YieldRas <- rasterize(myFBLLSPDFNF,r,'Yield')
+plot(YieldRas)
+title("Yield Raster (Bu/A)")
+```
+
+<img src="/Users/christopherbach/OneDrive/Development/agriPlot/Images/raster_yield_plot.png" alt="Yield Raster Plot" height=500px>
+
+*EC Data from: Application of Manifold GIS Software for Precision Agriculture Viacheslav I. Adamchuk and Abbas Hemmat 
