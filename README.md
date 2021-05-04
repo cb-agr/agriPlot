@@ -6,7 +6,7 @@ agriPlot is a suite of practical geospatial tools for agricultural field researc
 
 ## What is agriPlot?
 
-The core R function of agriPlot (i.e. agriPlot) takes a fieldbook that is comprised of an agricultural research experiment and computes longitude and latitude coordinates for each individual plot. Once geographical coordinates are assigned to individual plots, the general idea behind agriPlot is to provide users with easy-to-use functions for geospatial visualization and analyses of a user's field experiment. For instance, let's say you're planting a trial at a new site. agriPlot can help vizualize various placements of a field trial to identify an ideal planting area or generate a map to help ground truth field boundaries. agriPlot even has functions to help with more complicated tasks such as accurately planting border/filler in pivot tracks. The first step in any successful field trial is designing a valid experimental design while the second step is proper implementation and planting of said design. The second step is where agriPlot seeks to aide users. So agriPlot does **NOT** design agricultural field experiments. That’s left up to the user.
+The core R function of agriPlot (i.e. agriPlot) takes a fieldbook that is comprised of an agricultural research experiment and computes longitude and latitude coordinates for each individual plot. Once geographical coordinates are assigned to individual plots, the primary utility of agriPlot is to provide users with straight-forward functions for geospatial visualization and analyses of a field experiment. For instance, let's say you're planting a trial at a new site. agriPlot can help users vizualize various placements of a field trial to identify an ideal planting area and assess the spatial design. Additionally, users can generate a map to help ground truth field boundaries. agriPlot even has functions to help with more complicated tasks such as accurately planting border/filler in pivot tracks. To best visualize the various outputs of agriPlot, I highly recommend using open-source GIS software such as QGIS. agriPlot does **NOT** design agricultural field experiments. That’s left up to the user.
 
 ## What is a fieldbook?
 
@@ -18,7 +18,7 @@ The analysis performed by all the functions is accurate. However, when using thi
 
 ## Documentation
 
-General Workflow
+Main Workflow
 
 ```mermaid
 graph TD;
@@ -47,13 +47,13 @@ plotColumnNum: contains your fieldbook column numbers associated with each respe
 
 plotRows: this is the number of rows per plot. This might be a 2-row, 4-row or 6-row plot, etc. A fieldBook can have multiple plotRows. 
 
-testName: corresponding name of the test associated with the row/column you're evaluating. Please don't allow for any whitespace in the testName. Can be numeric, character or alphanumeric. 
+testName: corresponding name of the test associated with the plot you're evaluating. Please don't allow for any whitespace in the testName. Can be numeric, character or alphanumeric. 
 
 repNum: the replication number associated with the testName (i.e. 1,2,3). Must be an integer. 
 
 block: block associated with each testName.
 
-id: some unique identifier for each plot. Can be numeric, character or alphanumeric (i.e. 101,102,103 or plot101,plot102,plot103)
+id: unique identifier for each plot. Can be numeric, character or alphanumeric (i.e. 101,102,103 or plot101,plot102,plot103)
 
 #### <u>argiPlot</u>
 
@@ -105,7 +105,7 @@ Examples:
 fbLL <- agriplot(my2021FieldBook,-98.13135,40.89407,0.762,4,"WE-NS",0)
 ```
 
-Example agriPlot output fieldBook output with Long/Lat computed for each plot. Point coordinates representing each plot within a fieldBook were plotted in QGIS with a satellite imagery base layer.  
+Example agriPlot output with Long/Lat computed for each plot. Point coordinates representing each plot within a fieldBook were plotted in QGIS with a satellite imagery base layer. It's a very simple output, however, a user can nicely visualize how their field trial is position in a field. 
 
 <img src="/Users/christopherbach/OneDrive/Development/agriPlot/Images/fieldplotpic.png" alt="FieldPlotPic" height=400px>
 
@@ -165,7 +165,7 @@ demoFBLL <- agriDemoPlot(demoFB,-98.13135,40.89407,0.762,4,"SN-WE",0)
 
 **Description**
 
-fbLLPlotLeaflet is a simple function that takes the output of agriPlot.R or agriDemoPlot.R and plots the latitude and longitude points against satellite imagery using Leaflet. This function is meant for quick and easy viewing of your plot points.
+fbLLPlotLeaflet is a simple function that takes the output of agriPlot or agriDemoPlot and plots the latitude and longitude points against a satellite imagery layer using Leaflet. This function is meant for quick and easy viewing of your plot points.
 
 **Usage**
 
@@ -265,7 +265,7 @@ Plots intersecting with pivot tracks:
 
 <img src="/Users/christopherbach/OneDrive/Development/agriPlot/Images/plots_only_intersect.png" alt="Pivot tracks intersection" width=300px height=400px>
 
-In this example, maybe you've mapped a drainage pattern (in pink) and would like to plant a border in that area. 
+In the following example, maybe you've mapped a drainage pattern (in pink) and would like to plant a border in that area. 
 
 <img src="/Users/christopherbach/OneDrive/Development/agriPlot/Images/drainage_field.png" alt="Drainage pattern and field plots" height=400px>
 
@@ -300,16 +300,16 @@ Otherwise, users can enter any valid CRS.
 **Examples**
 
 ```R
-fbSPDF <- fbLLToSPDF(my2021FBLL,coordRefSys="default")
+myfbSPDF <- fbLLToSPDF(my2021FBLL,coordRefSys="default")
 ```
 
 Example using other CRS:
 
 ```R
-fbSPDF <- fbLLToSPDF(my2021FBLL,coordRefSys="EPSG:3857") # WGS84 / Psuedo-Mercator
+myfbSPDF <- fbLLToSPDF(my2021FBLL,coordRefSys="EPSG:3857") # WGS84 / Psuedo-Mercator
 ```
 
-#### <u>fbSPDFBoundField.R</u>
+#### <u>fieldBoundary.R</u>
 
 **Description**
 
@@ -318,7 +318,7 @@ This function takes a fieldBook Spatial Points Data Frame and computes a rectang
 **Usage**
 
 ```R
-fbSPDFBoundField(fieldBookLLSPDF)
+fieldBoundary(fieldBookLLSPDF)
 ```
 
 **Arguments**
@@ -330,7 +330,7 @@ fieldBookLLSPDF: fieldBook Spatial Points Data Frame
 Basic:
 
 ```R
-fbBoundGeom <- fbSPDFBoundField(fbSPDF)
+fbBoundGeom <- fieldBoundary(fbSPDF)
 ```
 
 Additional examples:
@@ -339,7 +339,7 @@ Additional examples:
 read.csv <- "agriPLot_fb_sample.csv"
 sampleNLL <- agriPlot(sample,-96.4106204,41.1467745,0.762,4,0,"SN-WE")
 fbSPDF <- fieldBookLLToSPDF(agDLL, coordRefSys = "default")
-fbBoundGeom <- fbSPDFBoundField(fbSPDF)
+fbBound <- fbSPDFBoundField(fbSPDF)
 #write shapefile
 shapefile(fbBoundGeom,"myfieldboundary")
 ```
@@ -350,39 +350,42 @@ Plot boundary using "plot" in R.
 plot(fbBoundGeom,axes=TRUE)
 ```
 
+The output shown here is a rectangular polygon field boundary that encloses all plots. The output from this function can also be used as a masking layer for a raster input.    
+
 <img src="/Users/christopherbach/OneDrive/Development/agriPlot/Images/fbboundaryoutput.png" alt="Field Boundary" height=300px>
 
-Field boundary with plot points.
+
 
 ```R
 #add plot points
 points(fbBoundGeom,cex=0.25)
 ```
 
-
+Field boundary with plot points.
 
 <img src="/Users/christopherbach/OneDrive/Development/agriPlot/Images/fieldbook_boundary_with_points.png" alt="fieldbook boundary with plot points" height=300px>
 
-Field boundary shapefile vector in QGIS:
+You can plot the vector shapefile output in QGIS. Further uses might include exporting a KML file from QGIS and loading it into a GIS iPhone application to take to the field. 
 
 <img src="/Users/christopherbach/OneDrive/Development/agriPlot/Images/field_boundaries.png" alt="field boundary in QGIS" height=300px>
 
-#### <u>fbSPDFBoundTests.R</u>
+#### <u>elementBoundaries</u>
 
 **Usage**
 
 ```R
-fbSPDFBoundTests(fieldBookLLSPDF,field)
+fbSPDFBoundTests(fieldBookLLSPDF,feature)
 ```
 
 **Description**
 
-This function computes a polygon boundary that encloses each feature (i.e. testNoRep or block) in a fieldBookLLSPDF from a user-specified field. The output of this function is a SpatialPolygonsDataFrame. The names features of the SpatialPolygonsDataFrame are called "blocks".
+This function computes a polygon boundary that encloses each unique element for a given variable  (i.e. testNoRep or block). Simply put, if you want a polygon boundary for each unique element associated with specific header name this is the function to do it. The output of this function is a SpatialPolygonsDataFrame. The names features of the SpatialPolygonsDataFrame are called "blocks".
 
 **Arguments**
 
 fieldBookLLSPDF: fieldBook as Spatial Points Data Frame
-field: field to bound
+
+variable: variable with elements to enclose
 
 **Example**
 
@@ -407,7 +410,7 @@ plot(myTests, asp=-1,axes=TRUE)
 text(myTests,"blocks",cex=0.5)
 ```
 
-In the plot below, each test is it's own repsective polygon feature. It's a nice visual representation of your field trial.  
+In the figure below, the plots associated with each test are enclosed in their own repsective polygon. This is one method for a nice visualization of a field trial layout. The output from this function can also be used as a masking layer for a raster input.    
 
 <img src="/Users/christopherbach/OneDrive/Development/agriPlot/Images/block_tests_example.png" alt="fieldBook Blocking example" height=500px>
 
@@ -432,7 +435,7 @@ agriPlotDim(fieldBookLL,buffer)
 **Arguments**
 
 fieldBookLL: fieldbook output from agriPlot with longitude and latitude for each plot
-buffer: plot dimension multiplier from > 0 to 1. You can think of this as how much of the plot dimensions do you want to include. A value of 1 would be the entire plot dimensions. Sometimes it's nice to use 0.8 to roughly account for the alley space of a plot. 
+buffer: plot dimension multiplier from > 0 to 1. You can think of this as how much of the plot dimensions do you want to include. A value of 1 would be the entire plot dimensions. I might recommend using 0.8 to roughly account for the alley space of a plot. 
 
 **Examples**
 
