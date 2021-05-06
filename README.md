@@ -338,6 +338,7 @@ fbLLToSPDF(fieldBookLL,coordRefSys)
 ```
 
 **Description**
+
 This function takes a fieldBookLL and converts it to a Spatial Points Data Frame (i.e.SDPF) using the library spatial points. This is an important transition in the workflow as the fieldBook is now a spatial object. This allows for more advanced spatial analysis/operations to be exectuted with libraries such as raster, rgeos, etc. 
 
 **Libraries**
