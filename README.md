@@ -266,8 +266,6 @@ cpLat: This is latitude coordinate for the center pivot. Should be taken right a
 
 **Examples**
 
-Output pivot tracks:
-
 ```R
 pivLL <- pivotTracksLL(c(55,109.5,163.249,217.919,272.5,326.718),-96.45504366,41.18194751)
 ```
@@ -316,15 +314,19 @@ myInt <- pivotPlotsIntersection(agDLL,pivLL,3)
 ```
 
 Pivot tracks (in green), fieldBook plots (in brown) and plots intersecting with pivot tracks (in red):
+
 <img src="https://github.com/cb-agr/agriPlot/blob/main/Images/plots_intersecting_pivot.png" alt="Pivot tracks intersection" width=450px height=400px>
 
 Plots intersecting with pivot tracks:
+
 <img src="https://github.com/cb-agr/agriPlot/blob/main/Images/plots_only_intersect.png" alt="Pivot tracks intersection" width=300px height=400px>
 
 In the following example, maybe you've mapped a drainage pattern (in pink) and would like to plant a border in that area:
+
 <img src="https://github.com/cb-agr/agriPlot/blob/main/Images/drainage_field.png" alt="Drainage pattern and field plots" height=400px>
 
 Intersecting plots:
+
 <img src="https://github.com/cb-agr/agriPlot/blob/main/Images/drainage_intersection.png" alt="Plots that intersect with drainage" height=400px>
 
 ### fbLLToSPDF:
@@ -406,7 +408,8 @@ Plot boundary using "plot" in R.
 plot(fbBoundary,axes=TRUE)
 ```
 
-The figure shown here is a rectangular polygon field boundary that encloses all plots. The output from this function can also be used as a masking layer for a raster input:    
+The figure shown here is a rectangular polygon field boundary that encloses all plots. The output from this function can also be used as a masking layer for a raster input:
+
 <img src="https://github.com/cb-agr/agriPlot/blob/main/Images/fbboundaryoutput.png" alt="Field Boundary" height=300px>
 
 ```R
@@ -415,6 +418,7 @@ points(fbBoundGeom,cex=0.25)
 ```
 
 Field boundary with plot points:
+
 <img src="https://github.com/cb-agr/agriPlot/blob/main/Images/fieldbook_boundary_with_points.png" alt="fieldbook boundary with plot points" height=300px>
 
 The figure below is the vector shapefile output in QGIS. Further uses might include exporting a KML file from QGIS and loading it into a GIS iPhone/Android application to take to the field. Notes: since this boundary only encloses single points representing plots, the area will be slightly smaller than the actual field area. If you want to account for the entire plot dimensions see agriPlotDim.  
@@ -465,10 +469,12 @@ plot(myTests, asp=-1,axes=TRUE)
 text(myTests,"blocks",cex=0.5)
 ```
 
-In the figure below, the plots associated with each test are enclosed in their own repsective polygon. This is one method for a nice visualization of a field trial layout. The output from this function can also be used as a masking layer for a raster input.    
+In the figure below, the plots associated with each test are enclosed in their own repsective polygon. This is one method for a nice visualization of a field trial layout. The output from this function can also be used as a masking layer for a raster input:
+
 <img src="https://github.com/cb-agr/agriPlot/blob/main/Images/block_tests_example.png" alt="fieldBook Blocking example" height=500px>
 
 Shapefile vector in QGIS:
+
 <img src="https://github.com/cb-agr/agriPlot/blob/main/Images/fieldbook_blocks_QGIS.png" alt="fieldBook with blocked tests" height=500px>
 
 ### agriPlotDim:
@@ -505,10 +511,12 @@ plotBounds <- elementBoundaries(dimSPDF,"id")
 plot(plotBounds)
 ```
 
-In the figure below, each rectangle represents a plot in the fieldBook with it's repsective dimensions: 
+In the figure below, each rectangle represents a plot in the fieldBook with it's repsective dimensions:
+
 <img src="https://github.com/cb-agr/agriPlot/blob/main/Images/plot_bounds.png" alt="plot bounds" height=400px>
 
 Plot bounds in QGIS:
+
 <img src="https://github.com/cb-agr/agriPlot/blob/main/Images/plot_bounds_qgis.png" alt="plot bounds in QGIS" height=400px>
 
 ### Additional examples and geospatial analysis: 
