@@ -1,5 +1,5 @@
 # req lib: library(rgeos)
-#encloseVarBoundaries takes fieldBookLLSPDF as input and through a series of functions generates blocks from a user-specific blocking input through a minimumb bounding geometry convex hull algorithm implemented in regeos. 
+#encloseVarBoundaries.R takes fieldBookLLSPDF as input and through a series of functions generates blocks from a user-specific blocking input through a minimumb bounding geometry convex hull algorithm implemented in regeos. 
 
 encloseVarBoundaries <- function(fieldBookLLSPDF,blocking){
 fieldBookLLSPDF <- fieldBookLLSPDF
