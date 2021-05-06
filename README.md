@@ -34,8 +34,6 @@ fieldBoundary --> raster_analysis;
 
 ```
 
-
-
 ### <u>fieldBook input:</u>
 
 Your fieldbook input can have any number of attributes but there are a handful of header names that are **essential** for agriPlot to work. Please see agriPlot_fb_sample.csv as an example fieldbook in the Sample_data folder. 
@@ -108,7 +106,7 @@ The first two letters before the hyphen represent the column direction in which 
 
 plantingAngle: The angle you planted at. Values greater than 0 rotate your field in a counterclockwise direction and values less than 0 rotate your field in a clockwise direction. If you planted "perfectly" vertical or horizontal then your plantingAngle is 0. I recommend using calcPlantingAngle.R to find your planting angle if you don't know it. 
 
-Examples
+**Examples**
 
 ```R
 fbLL <- agriplot(my2021FieldBook,-98.13135,40.89407,0.762,4,"WE-NS",0)
@@ -117,8 +115,6 @@ fbLL <- agriplot(my2021FieldBook,-98.13135,40.89407,0.762,4,"WE-NS",0)
 Example agriPlot output with Long/Lat computed for each plot. Point coordinates representing each plot within a fieldBook were plotted in QGIS with a satellite imagery base layer. With QGIS a user can nicely visualize how their field trial is positioned in a field. 
 
 <img src="https://github.com/cb-agr/agriPlot/blob/main/Images/fieldplotpic.png" alt="FieldPlotPic" height=350px>
-
-
 
 ### <u>calcPlantingAngle</u>:
 
@@ -218,7 +214,7 @@ demoFBLL <- agriDemoPlot(demoFB,-98.13135,40.89407,0.762,4,"SN-WE",0)
 
 **Description**
 
-plotLeaflet is a simple function that takes an fieldBookLL (i.e. output of agriPlot) and plots the latitude and longitude points against a satellite imagery layer using Leaflet. This function is meant for quick and easy viewing of your plot points.
+A simple function that takes a fieldBookLL (i.e. output of agriPlot) and plots the latitude and longitude points against a satellite imagery layer using Leaflet. This function is meant for quick and easy viewing of your plot points.
 
 **Libraries**
 
@@ -234,7 +230,7 @@ plotLeaflet(fieldBookLL)
 
 fieldBookLL: fieldBook with Latitude and Longitude for plots 
 
-**Example**
+**Examples**
 
 ```R
 leafletPlot <- plotLeaflet(fieldBookLL)
@@ -275,7 +271,7 @@ Output pivot tracks:
 pivLL <- pivotTracksLL(c(55,109.5,163.249,217.919,272.5,326.718),-96.45504366,41.18194751)
 ```
 
-Example output of pivot track point coordinates (in green) plotted using QGIS 
+Example output of pivot track point coordinates (in green) plotted using QGIS: 
 
 <img src="https://github.com/cb-agr/agriPlot/blob/main/Images/pivot_tracks.png" alt="pivot tracks" width=450px>
 
@@ -326,8 +322,6 @@ Plots intersecting with pivot tracks:
 
 In the following example, maybe you've mapped a drainage pattern (in pink) and would like to plant a border in that area:
 <img src="https://github.com/cb-agr/agriPlot/blob/main/Images/drainage_field.png" alt="Drainage pattern and field plots" height=400px>
-
-
 
 Intersecting plots:
 <img src="https://github.com/cb-agr/agriPlot/blob/main/Images/drainage_intersection.png" alt="Plots that intersect with drainage" height=400px>
@@ -449,7 +443,7 @@ fieldBookLLSPDF: fieldBook as Spatial Points Data Frame
 
 variable: variable with elements to enclose
 
-**Example**
+**Examples**
 
 ```R
 myBlocks <- encloseVarBoundaries(fieldBookLLSPDF,"testNoRep")
