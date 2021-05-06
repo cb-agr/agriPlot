@@ -116,6 +116,42 @@ Example agriPlot output with Long/Lat computed for each plot. Point coordinates 
 
 <img src="/Users/christopherbach/OneDrive/Development/agriPlot/Images/fieldplotpic.png" alt="FieldPlotPic" height=400px>
 
+
+
+#### <u>calcPlantingAngle</u>:
+
+**Description**
+
+Calculates planting angle based on an initial longitude and longitude, terminal longitude and latitude, direction of rotation and planting direction.
+
+**Usage**
+
+```R
+calcPlantingAngle(LongLat1,LongLat2,rotation,plantingDir)
+```
+
+**Arguments**
+
+LongLat1: this is the initial longitude and latitude of where you plan to begin planting. Values should be stored as c(-98.1878745,40.8915224). 
+
+LongLat2: the is the terminal longitude and latitude for where your first planting row will end. Values should be stored as c(-98.1878745,40.8915224).
+
+rotation: direction you will be rotating field. There are one of two inputs to select from (arguments must be in quotes):
+
+* "cw" - clockwise
+* "ccw" - counter-clockwise
+
+plantingDir: the direction you will be planting. There are one of two inputs to select from. 
+
+* "N/S" - north/south planting direction
+* "E/W" - east/west planting direction
+
+**Example**
+
+```R
+calcPlantingAngle(c(-98.1878745,40.8915224),c(-98.1846696,40.8909628),"cw","E/W")
+```
+
 #### <u>demoFieldBook</u>:
 
 **Description**
