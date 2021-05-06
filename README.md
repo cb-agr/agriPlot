@@ -1,6 +1,6 @@
 
 
- # agriPlot <img src= https://github.com/cb-agr/agriPlot/blob/main/Images/plotsNS.png alt="N/S Plots" height=30px width=50px> <img src=https://github.com/cb-agr/agriPlot/blob/main/Images/plotsEW.png alt="E/W Plots" height=30px>
+ # agriPlot <img src= https://github.com/cb-agr/agriPlot/blob/main/Images/plotsNS.png alt="N/S Plots" height=40px> <img src=https://github.com/cb-agr/agriPlot/blob/main/Images/plotsEW.png alt="E/W Plots" height=30px>
 
 agriPlot is a suite of practical geospatial tools for agricultural field research planning and analysis
 
@@ -90,7 +90,7 @@ The first two letters before the hyphen represent the row direction in which you
 - NS-WE – row numbers increase from North to South and column numbers increase from West to East
 - NS-EW – row numbers increase from North to South and column numbers increase from East to West 
 
-<img src="https://github.com/cb-agr/agriPlot/blob/main/Images/row_col_SNWE.svg" alt="SN-WE" style="height:500px">
+<img src="https://github.com/cb-agr/agriPlot/blob/main/Images/row_col_SNWE.svg" alt="SN-WE" width=500px height=500px>
 
 For East/West plantings:
 The first two letters before the hyphen represent the column direction in which your column numbers are increasing. The second two letters following the hyphen represent represents the row direction in which your row numbers are increasing. The are one of four East/West inputs to choose from.
@@ -112,7 +112,7 @@ fbLL <- agriplot(my2021FieldBook,-98.13135,40.89407,0.762,4,"WE-NS",0)
 
 Example agriPlot output with Long/Lat computed for each plot. Point coordinates representing each plot within a fieldBook were plotted in QGIS with a satellite imagery base layer. With QGIS a user can nicely visualize how their field trial is positioned in a field. 
 
-<img src="/Users/christopherbach/OneDrive/Development/agriPlot/Images/fieldplotpic.png" alt="FieldPlotPic" height=400px>
+<img src="https://github.com/cb-agr/agriPlot/blob/main/Images/fieldplotpic.png" alt="FieldPlotPic" height=400px>
 
 
 
@@ -241,7 +241,7 @@ Example output:
 
 
 
-<img src="/Users/christopherbach/OneDrive/Development/agriPlot/Images/leaflet_plotPic.png" alt="Leaflet plot pic" width=500px>
+<img src="https://github.com/cb-agr/agriPlot/blob/main/Images/leaflet_plotPic.png" alt="Leaflet plot pic" width=500px>
 
 
 
@@ -277,7 +277,7 @@ pivLL <- pivotTracksLL(c(55,109.5,163.249,217.919,272.5,326.718),-96.45504366,41
 
 Example output of pivot track point coordinates (in green) plotted using QGIS 
 
-<img src="/Users/christopherbach/OneDrive/Development/agriPlot/Images/pivot_tracks.png" alt="pivot tracks" width=450px>
+<img src="https://github.com/cb-agr/agriPlot/blob/main/Images/pivot_tracks.png" alt="pivot tracks" width=450px>
 
 #### <u>findIntersectingPlots.R</u>
 
@@ -320,21 +320,21 @@ myInt <- pivotPlotsIntersection(agDLL,pivLL,3)
 
 Pivot tracks (in green), fieldBook plots (in brown) and plots intersecting with pivot tracks (in red)
 
-<img src="/Users/christopherbach/OneDrive/Development/agriPlot/Images/plots_intersecting_pivot.png" alt="Pivot tracks intersection" width=450px height=400px>
+<img src="https://github.com/cb-agr/agriPlot/blob/main/Images/plots_intersecting_pivot.png" alt="Pivot tracks intersection" width=450px height=400px>
 
 Plots intersecting with pivot tracks:
 
-<img src="/Users/christopherbach/OneDrive/Development/agriPlot/Images/plots_only_intersect.png" alt="Pivot tracks intersection" width=300px height=400px>
+<img src="https://github.com/cb-agr/agriPlot/blob/main/Images/plots_only_intersect.png" alt="Pivot tracks intersection" width=300px height=400px>
 
 In the following example, maybe you've mapped a drainage pattern (in pink) and would like to plant a border in that area. 
 
-<img src="/Users/christopherbach/OneDrive/Development/agriPlot/Images/drainage_field.png" alt="Drainage pattern and field plots" height=400px>
+<img src="https://github.com/cb-agr/agriPlot/blob/main/Images/drainage_field.png" alt="Drainage pattern and field plots" height=400px>
 
 
 
 Intersecting plots:
 
-<img src="/Users/christopherbach/OneDrive/Development/agriPlot/Images/drainage_intersection.png" alt="Plots that intersect with drainage" height=400px>
+<img src="https://github.com/cb-agr/agriPlot/blob/main/Images/drainage_intersection.png" alt="Plots that intersect with drainage" height=400px>
 
 #### <u>fbLLToSPDF.R</u>
 
@@ -421,7 +421,7 @@ plot(fbBoundary,axes=TRUE)
 
 The figure shown here is a rectangular polygon field boundary that encloses all plots. The output from this function can also be used as a masking layer for a raster input.    
 
-<img src="/Users/christopherbach/OneDrive/Development/agriPlot/Images/fbboundaryoutput.png" alt="Field Boundary" height=300px>
+<img src="https://github.com/cb-agr/agriPlot/blob/main/Images/fbboundaryoutput.png" alt="Field Boundary" height=300px>
 
 
 
@@ -436,7 +436,7 @@ Field boundary with plot points.
 
 The figure below is the vector shapefile output in QGIS. Further uses might include exporting a KML file from QGIS and loading it into a GIS iPhone/Android application to take to the field. Notes: since this boundary only encloses single points representing plots, the area will be slightly smaller than the actual field area. If you want to account for the entire plot dimensions see agriPlotDim.  
 
-<img src="/Users/christopherbach/OneDrive/Development/agriPlot/Images/field_boundaries.png" alt="field boundary in QGIS" height=300px>
+<img src="https://github.com/cb-agr/agriPlot/blob/main/Images/field_boundaries.png" alt="field boundary in QGIS" height=300px>
 
 #### <u>encloseVarBoundaries</u>
 
@@ -485,13 +485,13 @@ text(myTests,"blocks",cex=0.5)
 
 In the figure below, the plots associated with each test are enclosed in their own repsective polygon. This is one method for a nice visualization of a field trial layout. The output from this function can also be used as a masking layer for a raster input.    
 
-<img src="/Users/christopherbach/OneDrive/Development/agriPlot/Images/block_tests_example.png" alt="fieldBook Blocking example" height=500px>
+<img src="https://github.com/cb-agr/agriPlot/blob/main/Images/block_tests_example.png" alt="fieldBook Blocking example" height=500px>
 
 
 
 Shapefile vector in QGIS:
 
-<img src="/Users/christopherbach/OneDrive/Development/agriPlot/Images/fieldbook_blocks_QGIS.png" alt="fieldBook with blocked tests" height=500px>
+<img src="https://github.com/cb-agr/agriPlot/blob/main/Images/fieldbook_blocks_QGIS.png" alt="fieldBook with blocked tests" height=500px>
 
 #### <u>agriPlotDim</u>
 
@@ -529,11 +529,11 @@ plot(plotBounds)
 
 In the figure below, each rectangle represents a plot in the fieldBook with it's repsective dimensions. 
 
-<img src="/Users/christopherbach/OneDrive/Development/agriPlot/Images/plot_bounds.png" alt="plot bounds" height=400px>
+<img src="https://github.com/cb-agr/agriPlot/blob/main/Images/plot_bounds.png" alt="plot bounds" height=400px>
 
 Plot bounds in QGIS:
 
-<img src="/Users/christopherbach/OneDrive/Development/agriPlot/Images/plot_bounds_qgis.png" alt="plot bounds in QGIS" height=400px>
+<img src="https://github.com/cb-agr/agriPlot/blob/main/Images/plot_bounds_qgis.png" alt="plot bounds in QGIS" height=400px>
 
 #### Additional examples and geospatial analysis: 
 
@@ -549,7 +549,7 @@ title("EC Deep (mS/m)")
 
 
 
-<img src="/Users/christopherbach/OneDrive/Development/agriPlot/Images/ec_deep_map.png" alt="EC Deep Map" height=500px>
+<img src="https://github.com/cb-agr/agriPlot/blob/main/Images/ec_deep_map.png" alt="EC Deep Map" height=500px>
 
 Add boundary for fieldBook (i.e. output from fieldBoundary):
 
@@ -559,7 +559,7 @@ plot(myFieldBoundary,add=TRUE)
 
 
 
-<img src="/Users/christopherbach/OneDrive/Development/agriPlot/Images/ec_deep_w_field_boundary.png" alt="EC Deep with field boundary" height=500px>
+<img src="https://github.com/cb-agr/agriPlot/blob/main/Images/ec_deep_w_field_boundary.png" alt="EC Deep with field boundary" height=500px>
 
 Mask raster with field boundary layer:
 
@@ -569,7 +569,7 @@ plot(fieldMask,axes=TRUE)
 plot(myBounds,add=TRUE)
 ```
 
-<img src="/Users/christopherbach/OneDrive/Development/agriPlot/Images/my_boundary_ec_mask.png" alt="EC Mask Layer" height=500px>
+<img src="https://github.com/cb-agr/agriPlot/blob/main/Images/my_boundary_ec_mask.png" alt="EC Mask Layer" height=500px>
 
 ```R
 plot(myTests,asp=-1,axes=TRUE)
@@ -581,7 +581,7 @@ title("EC Deep (mS/m) and Field Tests")
 
 In this figure we have individual test boundaries overlayed on our EC Deep map. More than anything, it's a nice soil EC map that displays spatial variability across a field trial. If you had drone NDVI imagery, the same steps/concept would apply here as well. 
 
-<img src="/Users/christopherbach/OneDrive/Development/agriPlot/Images/ec_mask_with_test_blocks.png" alt="Mask Layer with test blocks" height=500px>
+<img src="https://github.com/cb-agr/agriPlot/blob/main/Images/ec_mask_with_test_blocks.png" alt="Mask Layer with test blocks" height=500px>
 
 **Make a raster plot with yield data**
 
@@ -602,6 +602,6 @@ plot(YieldRas)
 title("Yield Raster (Bu/A)")
 ```
 
-<img src="/Users/christopherbach/OneDrive/Development/agriPlot/Images/raster_yield_plot.png" alt="Yield Raster Plot" height=500px>
+<img src="https://github.com/cb-agr/agriPlot/blob/main/Images/raster_yield_plot.png" alt="Yield Raster Plot" height=500px>
 
 *EC Data from: Application of Manifold GIS Software for Precision Agriculture Viacheslav I. Adamchuk and Abbas Hemmat 
