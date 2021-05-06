@@ -90,7 +90,7 @@ The first two letters before the hyphen represent the row direction in which you
 - NS-WE – row numbers increase from North to South and column numbers increase from West to East
 - NS-EW – row numbers increase from North to South and column numbers increase from East to West 
 
-<img src="https://github.com/cb-agr/agriPlot/blob/main/Images/row_col_SNWE.svg" alt="SN-WE" width=500px height=500px>
+<img src="https://github.com/cb-agr/agriPlot/blob/main/Images/row_col_SNWE.svg" alt="SN-WE" width=400px height=400px>
 
 For East/West plantings:
 The first two letters before the hyphen represent the column direction in which your column numbers are increasing. The second two letters following the hyphen represent represents the row direction in which your row numbers are increasing. The are one of four East/West inputs to choose from.
@@ -100,7 +100,7 @@ The first two letters before the hyphen represent the column direction in which 
 - EW-SN – column numbers increase from East to West and row numbers increase from South to North
 - EW-NS – column numbers increase from East to West and row numbers increase from North to South
 
-<img src="https://github.com/cb-agr/agriPlot/blob/main/Images/ew_sn_agriplot.svg" alt="EW-SN" width=400px height=400px>
+<img src="https://github.com/cb-agr/agriPlot/blob/main/Images/ew_sn_agriplot.svg" alt="EW-SN" width=500px height=500px>
 
 plantingAngle: The angle you planted at. Values greater than 0 rotate your field in a counterclockwise direction and values less than 0 rotate your field in a clockwise direction. If you planted "perfectly" vertical or horizontal then your plantingAngle is 0. I recommend using calcPlantingAngle.R to find your planting angle if you don't know it. 
 
@@ -112,7 +112,7 @@ fbLL <- agriplot(my2021FieldBook,-98.13135,40.89407,0.762,4,"WE-NS",0)
 
 Example agriPlot output with Long/Lat computed for each plot. Point coordinates representing each plot within a fieldBook were plotted in QGIS with a satellite imagery base layer. With QGIS a user can nicely visualize how their field trial is positioned in a field. 
 
-<img src="https://github.com/cb-agr/agriPlot/blob/main/Images/fieldplotpic.png" alt="FieldPlotPic" height=400px>
+<img src="https://github.com/cb-agr/agriPlot/blob/main/Images/fieldplotpic.png" alt="FieldPlotPic" height=350px>
 
 
 
