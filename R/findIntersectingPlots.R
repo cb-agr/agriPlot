@@ -1,11 +1,11 @@
 
 #req lib: library(raster)
-#pivotPlotsIntersection.R - takes a fieldbook with plots that have a longitude/latitude and a center pivot with longitude/latitude for each span and calculates a distance matrix. 
+#findIntersectingPlots.R - takes a fieldbook with plots that have a longitude/latitude and a center pivot with longitude/latitude for each span and calculates a distance matrix. 
 #The distance matrix is then filtered by user-defined distance (in meters!!!) from each plot to a pivot point
 #The resulting filtered matrix is then used to output a fieldbook ONLY containing plots that intersect with a pivot point. 
 #The final output of this program can be used to determine where to place filler/border plots that intersect with pivot tracks
 
-pivotPlotsIntersection <- function(fieldbookLL, pivotTracksLL,distance){
+findIntersectingPlots <- function(fieldbookLL, pivotTracksLL,distance){
 fb <- fieldbookLL
 ptLL <- pivotTracksLL
 row.names(fb) <- paste("R", 1:nrow(fb), sep="") 
