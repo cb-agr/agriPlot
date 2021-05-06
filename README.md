@@ -18,24 +18,27 @@ The analysis performed by all the functions is accurate. However, when using thi
 
 ## Documentation
 
-Main Workflow
+Primary Workflow 
 
 ```mermaid
 graph TD;
 fieldBook -->agriPlot;
 agriPlot -->fieldBookLL;
-fieldBookLL --> fbLLPlotLeaflet;
+fieldBookLL --> plotLeaflet;
 fieldBookLL --> findIntersectingPlots;
 fieldBookLL --> fbLLToSPDF;
-fbLLToSPDF --> fbSPDFBlocks;
-fbLLToSPDF --> fbSPDFBoundGeom;
+fbLLToSPDF --> encloseVarBoundaries;
+fbLLToSPDF --> fieldBoundary;
+encloseVarBoundaries --> raster_analysis;
+fieldBoundary --> raster_analysis;
+
 ```
 
 
 
 #### <u>fieldBook input:</u>
 
-Your fieldbook input can have any number of attributes but there are a handful of header names that are **essential** for agriPlot to work. 
+Your fieldbook input can have any number of attributes but there are a handful of header names that are **essential** for agriPlot to work. Please see agriPlot_fb_sample.csv as an example fieldbook in the Sample_data folder. 
 
 plotRowNum: contains your fieldbook row numbers associated with each respective plot. Must be an integer.
 
@@ -60,6 +63,10 @@ id: unique identifier for each plot. Can be numeric, character or alphanumeric (
 **Description**
 
 agriPlot is the core function that serves as input for all of the other functions outlined here. The input is a user fieldBook with specified header names. Users just have to enter a handful of inputs and agriPlot.R will output a latitude and longitude for each plot in your fieldBook. This output will be referred to as fieldBookLL.  
+
+**Libraries**
+
+library(data.table), library(plyr)
 
 **Usage**
 
@@ -105,7 +112,7 @@ Examples:
 fbLL <- agriplot(my2021FieldBook,-98.13135,40.89407,0.762,4,"WE-NS",0)
 ```
 
-Example agriPlot output with Long/Lat computed for each plot. Point coordinates representing each plot within a fieldBook were plotted in QGIS with a satellite imagery base layer. It's a very simple output, however, a user can nicely visualize how their field trial is positioned in a field. 
+Example agriPlot output with Long/Lat computed for each plot. Point coordinates representing each plot within a fieldBook were plotted in QGIS with a satellite imagery base layer. With QGIS a user can nicely visualize how their field trial is positioned in a field. 
 
 <img src="/Users/christopherbach/OneDrive/Development/agriPlot/Images/fieldplotpic.png" alt="FieldPlotPic" height=400px>
 
@@ -113,6 +120,10 @@ Example agriPlot output with Long/Lat computed for each plot. Point coordinates 
 
 **Description**
     Generates a simple "demo" fieldbook from a specified number of rows, columns and plot rows. In 	some instances a user may not have a fieldbook quite yet prepared for the season but still may want the option for a preliminary visualization their field trial layout. The output of this function is only intended to be used with agriDemoplot (explained after this function).
+
+**Libraries**
+
+library(data.table), library(plyr)
 
 **Usage**
 
@@ -145,7 +156,11 @@ demoFB <- do.call(rbind,demoFBList)
 
 **Description**
 
-agriDemoplot.R is virtually the same function as agriPlot.R, however, it's only meant to take a fieldbook generated from demoFieldBook as input. agriDemoplot can take the output from demoFieldBook as is. To limit redundancy in the README please refer agriPlot for explaination of the agruments. 
+agriDemoplot is virtually the same function as agriPlot, however, it's only meant to take a fieldbook generated from demoFieldBook as input. agriDemoplot can take the output from demoFieldBook as is. To limit redundancy in the README please refer agriPlot for explaination of the agruments. 
+
+**Libraries**
+
+library(data.table)
 
 **Usage**
 
@@ -165,7 +180,11 @@ demoFBLL <- agriDemoPlot(demoFB,-98.13135,40.89407,0.762,4,"SN-WE",0)
 
 **Description**
 
-plotLeaflet is a simple function that takes the output of agriPlot or agriDemoPlot and plots the latitude and longitude points against a satellite imagery layer using Leaflet. This function is meant for quick and easy viewing of your plot points.
+plotLeaflet is a simple function that takes an fieldBookLL (i.e. output of agriPlot) and plots the latitude and longitude points against a satellite imagery layer using Leaflet. This function is meant for quick and easy viewing of your plot points.
+
+**Libraries**
+
+library(leaflet)
 
 **Usage**
 
@@ -198,6 +217,10 @@ Example output:
 
 This function takes the radius of each center pivot track, the Longitude and Latitude of the center pivot and calculates latitude and longitude points for each respective track. Assumes center pivot is a 360 degree circle. Can be used as input for findIntersectingPlots to determine which plots intersect with pivot tracks.
 
+**Libraries**
+
+library(foreach)
+
 **Usage**
 
 ```R
@@ -226,7 +249,11 @@ Example output of pivot track point coordinates (in green) plotted using QGIS
 
 **Description**
 
-findIntersectingPlots.R takes a fieldBookLL (i.e. output from agriPlot) and a given set of coordinates (i.e. pointsOfInterest) and outputs intersecting plots at a user-specified distance.
+findIntersectingPlots.R takes a fieldBookLL (i.e. output from agriPlot) and a given set of coordinates (i.e. pointsOfInterest) and outputs intersecting plots at a user-specified distance. 
+
+**Libraries**
+
+library(raster)
 
 **Usage**
 
@@ -248,7 +275,7 @@ Basic usage:
 fbLLintersection <- findIntersectingPlots(fbLL,pivotLL,3)
 ```
 
-For starters, any set of pointsofInterest can be used. But in the following example we'll demonstrate how to use the function to find plots that intersect with pivot tracks. This is useful for mapping border plots into pivot tracks.
+For starters, any set of pointsofInterest can be used. But in the following example we'll demonstrate how to use the function to find plots that intersect with pivot tracks. This is useful for mapping border plots into pivot tracks. **Note, if you shift your field trial in any direction, you need to be aware that plot intersections may change as well!!!** So if you're doing this in practice you should add a little extra border in pivot tracks based on the intersections for good measure to allow for any minor adjustments during planting. 
 
 ```R
 agD <- demoFieldBook(1,60,1,37,4)
@@ -284,7 +311,11 @@ fbLLToSPDF(fieldBookLL,coordRefSys)
 ```
 
 **Description**
-This function takes a fieldBookLL and converts it to a Spatial Points Data Frame (i.e.SDPF) using the library spatial points. This is an important transition in the workflow as the fieldBook is now a spatial object. This allows for more advanced spatial analysis/operations to be exectuted. 
+This function takes a fieldBookLL and converts it to a Spatial Points Data Frame (i.e.SDPF) using the library spatial points. This is an important transition in the workflow as the fieldBook is now a spatial object. This allows for more advanced spatial analysis/operations to be exectuted with libraries such as raster, rgeos, etc. 
+
+**Libraries**
+
+library(sp)
 
 **Arguments**
 
@@ -315,6 +346,10 @@ myfbSPDF <- fbLLToSPDF(my2021FBLL,coordRefSys="EPSG:3857") # WGS84 / Psuedo-Merc
 
 This function takes a fieldBook Spatial Points Data Frame and computes a rectangular polygon that encloses all fieldBook plot points.
 
+**Libraries**
+
+library(sp), library(rgeos)
+
 **Usage**
 
 ```R
@@ -330,24 +365,24 @@ fieldBookLLSPDF: fieldBook Spatial Points Data Frame
 Basic:
 
 ```R
-fbBoundGeom <- fieldBoundary(fbSPDF)
+fbBoundary <- fieldBoundary(fbSPDF)
 ```
 
 Additional examples:
 
 ```R
-read.csv <- "agriPLot_fb_sample.csv"
+read.csv <- "agriPlot_fb_sample.csv"
 sampleNLL <- agriPlot(sample,-96.4106204,41.1467745,0.762,4,0,"SN-WE")
 fbSPDF <- fieldBookLLToSPDF(agDLL, coordRefSys = "default")
-fbBound <- fbSPDFBoundField(fbSPDF)
+fbBoundary <- fieldBoundary(fbSPDF)
 #write shapefile
-shapefile(fbBoundGeom,"myfieldboundary")
+shapefile(fbBoundary,"myfieldboundary")
 ```
 
 Plot boundary using "plot" in R. 
 
 ```R
-plot(fbBoundGeom,axes=TRUE)
+plot(fbBoundary,axes=TRUE)
 ```
 
 The figure shown here is a rectangular polygon field boundary that encloses all plots. The output from this function can also be used as a masking layer for a raster input.    
@@ -365,21 +400,25 @@ Field boundary with plot points.
 
 <img src="/Users/christopherbach/OneDrive/Development/agriPlot/Images/fieldbook_boundary_with_points.png" alt="fieldbook boundary with plot points" height=300px>
 
-You can plot the vector shapefile output in QGIS. Further uses might include exporting a KML file from QGIS and loading it into a GIS iPhone/Android application to take to the field. 
+The figure below is the vector shapefile output in QGIS. Further uses might include exporting a KML file from QGIS and loading it into a GIS iPhone/Android application to take to the field. Notes: since this boundary only encloses single points representing plots, the area will be slightly smaller than the actual field area. If you want to account for the entire plot dimensions see agriPlotDim.  
 
 <img src="/Users/christopherbach/OneDrive/Development/agriPlot/Images/field_boundaries.png" alt="field boundary in QGIS" height=300px>
 
-#### <u>elementBoundaries</u>
+#### <u>encloseVarBoundaries</u>
 
 **Usage**
 
 ```R
-elementBoundaries(fieldBookLLSPDF,feature)
+encloseVarBoundaries(fieldBookLLSPDF,feature)
 ```
 
 **Description**
 
-This function computes a polygon boundary that encloses each unique element for a given variable  (i.e. testNoRep or block). Simply put, if you want a polygon boundary for each unique element associated with specific header name, this is the function to do it. The output of this function is a SpatialPolygonsDataFrame. The names features of the SpatialPolygonsDataFrame are called "blocks".
+This function computes a polygon boundary that encloses each unique variable  (i.e. testNoRep or block). Simply put, if you want a polygon boundary for each variable associated with a specific header name, this is the function to do it. The output of this function is a SpatialPolygonsDataFrame. The names features of the SpatialPolygonsDataFrame are called "blocks".
+
+**Libraries**
+
+library(sp), library(rgeos)
 
 **Arguments**
 
@@ -390,7 +429,7 @@ variable: variable with elements to enclose
 **Example**
 
 ```R
-myBlocks <- elementBoundaries(fieldBookLLSPDF,"testNoRep")
+myBlocks <- encloseVarBoundaries(fieldBookLLSPDF,"testNoRep")
 ```
 
 Below we'll use "agriPLot_fb_sample.csv" as an example to further demonstrate this function.
@@ -401,7 +440,7 @@ myFBLL <- agriPlot(sample,-96.4944759,41.1636251,0.762,4,"SN-WE",0)
 mySPDF <- fbLLToSPDF(myFBLL,"default")
 #important step: remove filler/border plots!!!
 mySPDFNoB <- fbSPDFRemoveBorder(mySPDF,"Border")
-myTests <- fbSPDFBoundTests(mySPDFNoB,"testNameRep") #bound with "testNoRep"
+myTests <- encloseVarBoundaries(mySPDFNoB,"testNameRep") #bound with "testNoRep"
 #write shapefile
 shapefile(myTests,"myTests")
 #plot result in R
@@ -424,7 +463,7 @@ Shapefile vector in QGIS:
 
 **Description**
 
-Displaying a plot as one point has some shortcommings because it doesn't account for the entire dimensions of a plot. If this is of interest, users can compute a longitude and latitude for all four corners of a plot's dimensions using agriPlotDim.R. The output from agriPlotDim would represent the most accurate field boundary as it accounts for plot dimensions. It should be noted that the output of this function only contains the following headers: 
+Displaying a plot as one point has some shortcommings because it doesn't account for the entire dimensions of a plot. If this is of interest, users can compute a longitude and latitude for all four corners of a plot's dimensions using agriPlotDim.R. The output from agriPlotDim would represent the most accurate field boundary as it accounts for plot dimensions. It should be noted that the output of this function only contains the following headers: id, block, plotRowNum, plotColumnNum, plotRows, testNameRep, Longitude, Latitude.
 
 **Usage**
 
@@ -454,7 +493,7 @@ plotBounds <- elementBoundaries(dimSPDF,"id")
 plot(plotBounds)
 ```
 
-R plot: each rectangle here is a plot in the fieldBook. 
+In the figure below, each rectangle represents a plot in the fieldBook with it's repsective dimensions. 
 
 <img src="/Users/christopherbach/OneDrive/Development/agriPlot/Images/plot_bounds.png" alt="plot bounds" height=400px>
 
@@ -506,7 +545,7 @@ text(myTests,"Blocks",cex=0.5)
 title("EC Deep (mS/m) and Field Tests")
 ```
 
-In this figure we have individual test boundaries overlayed on our EC Deep map. More than anything, it's a nice soil EC map that displays some spatial variability across a field trial. If you had drone NDVI imagery, the same steps/concept would apply here as well. 
+In this figure we have individual test boundaries overlayed on our EC Deep map. More than anything, it's a nice soil EC map that displays spatial variability across a field trial. If you had drone NDVI imagery, the same steps/concept would apply here as well. 
 
 <img src="/Users/christopherbach/OneDrive/Development/agriPlot/Images/ec_mask_with_test_blocks.png" alt="Mask Layer with test blocks" height=500px>
 
@@ -520,7 +559,7 @@ myFBLL <- agriPlot(fbYield,-96.4944759,41.1636251,0.762,4,"SN-WE",0)
 myFBLLSPDF <- fbLLToSPDF(myFBLL,"default")
 #remove border, it's just easier and you probably don't care about the yield anyways
 myFBLLSPDFNOB <- fbSPDFRemoveBorder(myFBLLSPDF,"Border")
-#this next steps generates a raster with empty cells and it's bounds are the fbSPDF
+#this next steps generates a raster with empty cells and it's bounds are the myFBLLSPDF
 #ncol and nrow is the number of columns and rows in your fieldbook
 r <- raster(myFBLLSPDFNOB, ncol=58,nrow=64, crs="+proj=utm +zone=18 +datum=WGS84 +units=m +no_defs")
 #rasterize Yield data 
