@@ -56,7 +56,7 @@ block: block associated with each testName.
 
 id: unique identifier for each plot. Can be numeric, character or alphanumeric (i.e. 101,102,103 or plot101,plot102,plot103)
 
-### <u>argiPlot</u>
+### argiPlot:
 
 **Description**
 
@@ -116,7 +116,7 @@ Example agriPlot output with Long/Lat computed for each plot. Point coordinates 
 
 <img src="https://github.com/cb-agr/agriPlot/blob/main/Images/fieldplotpic.png" alt="FieldPlotPic" height=350px>
 
-### <u>calcPlantingAngle</u>:
+### calcPlantingAngle:
 
 **Description**
 
@@ -186,7 +186,7 @@ demoFBList <- list(A=demoFieldBook(1,50,1,6,2),B=demoFieldBook(1,50,7,12,4),C=de
 demoFB <- do.call(rbind,demoFBList)
 ```
 
-### <u>agriDemoPlot</u>
+### agriDemoPlot:
 
 **Description**
 
@@ -210,7 +210,7 @@ demoFB <- do.call(rbind,demoFBList)
 demoFBLL <- agriDemoPlot(demoFB,-98.13135,40.89407,0.762,4,"SN-WE",0)
 ```
 
-### <u>plotLeaflet</u>
+### plotLeaflet:
 
 **Description**
 
@@ -241,7 +241,7 @@ Example output:
 
 <img src="https://github.com/cb-agr/agriPlot/blob/main/Images/leaflet_plotPic.png" alt="Leaflet plot pic" width=500px>
 
-### <u>pivotTracksLL</u>
+### pivotTracksLL:
 
 **Description**
 
@@ -275,7 +275,7 @@ Example output of pivot track point coordinates (in green) plotted using QGIS:
 
 <img src="https://github.com/cb-agr/agriPlot/blob/main/Images/pivot_tracks.png" alt="pivot tracks" width=450px>
 
-### <u>findIntersectingPlots</u>
+### findIntersectingPlots:
 
 **Description**
 
@@ -326,7 +326,7 @@ In the following example, maybe you've mapped a drainage pattern (in pink) and w
 Intersecting plots:
 <img src="https://github.com/cb-agr/agriPlot/blob/main/Images/drainage_intersection.png" alt="Plots that intersect with drainage" height=400px>
 
-### <u>fbLLToSPDF</u>
+### fbLLToSPDF:
 
 **Usage**
 
@@ -364,7 +364,7 @@ Example using other CRS:
 myfbSPDF <- fbLLToSPDF(my2021FBLL,coordRefSys="EPSG:3857") # WGS84 / Psuedo-Mercator
 ```
 
-#### <u>fieldBoundary</u>
+#### fieldBoundary:
 
 **Description**
 
@@ -389,8 +389,6 @@ fieldBookLLSPDF: fieldBook Spatial Points Data Frame
 ```R
 fbBoundary <- fieldBoundary(fbSPDF)
 ```
-
-Additional examples:
 
 ```R
 read.csv <- "agriPlot_fb_sample.csv"
@@ -421,7 +419,7 @@ Field boundary with plot points:
 The figure below is the vector shapefile output in QGIS. Further uses might include exporting a KML file from QGIS and loading it into a GIS iPhone/Android application to take to the field. Notes: since this boundary only encloses single points representing plots, the area will be slightly smaller than the actual field area. If you want to account for the entire plot dimensions see agriPlotDim.  
 <img src="https://github.com/cb-agr/agriPlot/blob/main/Images/field_boundaries.png" alt="field boundary in QGIS" height=300px>
 
-### <u>encloseVarBoundaries</u>
+### encloseVarBoundaries:
 
 **Usage**
 
@@ -472,7 +470,7 @@ In the figure below, the plots associated with each test are enclosed in their o
 Shapefile vector in QGIS:
 <img src="https://github.com/cb-agr/agriPlot/blob/main/Images/fieldbook_blocks_QGIS.png" alt="fieldBook with blocked tests" height=500px>
 
-### <u>agriPlotDim</u>
+### agriPlotDim:
 
 **Description**
 
