@@ -1,6 +1,6 @@
 
 
-# <img src="/Users/christopherbach/OneDrive/Development/agriPlot/Images/plotsNS.png" alt="N/S Plots" style="height:30px">agriPlot <img src="/Users/christopherbach/OneDrive/Development/agriPlot/Images/plotsEW.png" alt="E/W Plots" style="height:25px">
+# <img src="https://github.com/cb-agr/agriPlot/blob/Images/plotsEW.png?raw=true alt="E/W Plots" style="height:25px">
 
 agriPlot is a suite of practical geospatial tools for agricultural field research planning and analysis
 
