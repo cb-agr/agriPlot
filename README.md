@@ -36,7 +36,7 @@ fieldBoundary --> raster_analysis;
 
 
 
-#### <u>fieldBook input:</u>
+### <u>fieldBook input:</u>
 
 Your fieldbook input can have any number of attributes but there are a handful of header names that are **essential** for agriPlot to work. Please see agriPlot_fb_sample.csv as an example fieldbook in the Sample_data folder. 
 
@@ -58,7 +58,7 @@ block: block associated with each testName.
 
 id: unique identifier for each plot. Can be numeric, character or alphanumeric (i.e. 101,102,103 or plot101,plot102,plot103)
 
-#### <u>argiPlot</u>
+### <u>argiPlot</u>
 
 **Description**
 
@@ -104,7 +104,7 @@ The first two letters before the hyphen represent the column direction in which 
 
 plantingAngle: The angle you planted at. Values greater than 0 rotate your field in a counterclockwise direction and values less than 0 rotate your field in a clockwise direction. If you planted "perfectly" vertical or horizontal then your plantingAngle is 0. I recommend using calcPlantingAngle.R to find your planting angle if you don't know it. 
 
-Examples:
+Examples
 
 ```R
 fbLL <- agriplot(my2021FieldBook,-98.13135,40.89407,0.762,4,"WE-NS",0)
@@ -116,7 +116,7 @@ Example agriPlot output with Long/Lat computed for each plot. Point coordinates 
 
 
 
-#### <u>calcPlantingAngle</u>:
+### <u>calcPlantingAngle</u>:
 
 **Description**
 
@@ -150,7 +150,7 @@ plantingDir: the direction you will be planting. There are one of two inputs to 
 calcPlantingAngle(c(-98.1878745,40.8915224),c(-98.1846696,40.8909628),"cw","E/W")
 ```
 
-#### <u>demoFieldBook</u>:
+### <u>demoFieldBook</u>:
 
 **Description**
     Generates a simple "demo" fieldbook from a specified number of rows, columns and plot rows. In 	some instances a user may not have a fieldbook quite yet prepared for the season but still may want the option for a preliminary visualization their field trial layout. The output of this function is only intended to be used with agriDemoplot (explained after this function).
@@ -186,7 +186,7 @@ demoFBList <- list(A=demoFieldBook(1,50,1,6,2),B=demoFieldBook(1,50,7,12,4),C=de
 demoFB <- do.call(rbind,demoFBList)
 ```
 
-#### <u>agriDemoPlot</u>
+### <u>agriDemoPlot</u>
 
 **Description**
 
@@ -210,7 +210,7 @@ demoFB <- do.call(rbind,demoFBList)
 demoFBLL <- agriDemoPlot(demoFB,-98.13135,40.89407,0.762,4,"SN-WE",0)
 ```
 
-#### <u>plotLeaflet</u>
+### <u>plotLeaflet</u>
 
 **Description**
 
@@ -239,13 +239,9 @@ leafletPlot
 
 Example output:
 
-
-
 <img src="https://github.com/cb-agr/agriPlot/blob/main/Images/leaflet_plotPic.png" alt="Leaflet plot pic" width=500px>
 
-
-
-#### <u>pivotTracksLL</u>
+### <u>pivotTracksLL</u>
 
 **Description**
 
@@ -279,7 +275,7 @@ Example output of pivot track point coordinates (in green) plotted using QGIS
 
 <img src="https://github.com/cb-agr/agriPlot/blob/main/Images/pivot_tracks.png" alt="pivot tracks" width=450px>
 
-#### <u>findIntersectingPlots.R</u>
+### <u>findIntersectingPlots</u>
 
 **Description**
 
@@ -318,25 +314,21 @@ pivLL <- pivotTracksLL(c(55,109.5,163.249,217.919,272.5,326.718),-96.45504366,41
 myInt <- pivotPlotsIntersection(agDLL,pivLL,3)
 ```
 
-Pivot tracks (in green), fieldBook plots (in brown) and plots intersecting with pivot tracks (in red)
-
+Pivot tracks (in green), fieldBook plots (in brown) and plots intersecting with pivot tracks (in red):
 <img src="https://github.com/cb-agr/agriPlot/blob/main/Images/plots_intersecting_pivot.png" alt="Pivot tracks intersection" width=450px height=400px>
 
 Plots intersecting with pivot tracks:
-
 <img src="https://github.com/cb-agr/agriPlot/blob/main/Images/plots_only_intersect.png" alt="Pivot tracks intersection" width=300px height=400px>
 
-In the following example, maybe you've mapped a drainage pattern (in pink) and would like to plant a border in that area. 
-
+In the following example, maybe you've mapped a drainage pattern (in pink) and would like to plant a border in that area:
 <img src="https://github.com/cb-agr/agriPlot/blob/main/Images/drainage_field.png" alt="Drainage pattern and field plots" height=400px>
 
 
 
 Intersecting plots:
-
 <img src="https://github.com/cb-agr/agriPlot/blob/main/Images/drainage_intersection.png" alt="Plots that intersect with drainage" height=400px>
 
-#### <u>fbLLToSPDF.R</u>
+### <u>fbLLToSPDF</u>
 
 **Usage**
 
@@ -374,7 +366,7 @@ Example using other CRS:
 myfbSPDF <- fbLLToSPDF(my2021FBLL,coordRefSys="EPSG:3857") # WGS84 / Psuedo-Mercator
 ```
 
-#### <u>fieldBoundary.R</u>
+#### <u>fieldBoundary</u>
 
 **Description**
 
@@ -395,8 +387,6 @@ fieldBoundary(fieldBookLLSPDF)
 fieldBookLLSPDF: fieldBook Spatial Points Data Frame
 
 **Examples**
-
-Basic:
 
 ```R
 fbBoundary <- fieldBoundary(fbSPDF)
@@ -419,26 +409,21 @@ Plot boundary using "plot" in R.
 plot(fbBoundary,axes=TRUE)
 ```
 
-The figure shown here is a rectangular polygon field boundary that encloses all plots. The output from this function can also be used as a masking layer for a raster input.    
-
+The figure shown here is a rectangular polygon field boundary that encloses all plots. The output from this function can also be used as a masking layer for a raster input:    
 <img src="https://github.com/cb-agr/agriPlot/blob/main/Images/fbboundaryoutput.png" alt="Field Boundary" height=300px>
-
-
 
 ```R
 #add plot points
 points(fbBoundGeom,cex=0.25)
 ```
 
-Field boundary with plot points.
-
+Field boundary with plot points:
 <img src="https://github.com/cb-agr/agriPlot/blob/main/Images/fieldbook_boundary_with_points.png" alt="fieldbook boundary with plot points" height=300px>
 
 The figure below is the vector shapefile output in QGIS. Further uses might include exporting a KML file from QGIS and loading it into a GIS iPhone/Android application to take to the field. Notes: since this boundary only encloses single points representing plots, the area will be slightly smaller than the actual field area. If you want to account for the entire plot dimensions see agriPlotDim.  
-
 <img src="https://github.com/cb-agr/agriPlot/blob/main/Images/field_boundaries.png" alt="field boundary in QGIS" height=300px>
 
-#### <u>encloseVarBoundaries</u>
+### <u>encloseVarBoundaries</u>
 
 **Usage**
 
@@ -484,16 +469,12 @@ text(myTests,"blocks",cex=0.5)
 ```
 
 In the figure below, the plots associated with each test are enclosed in their own repsective polygon. This is one method for a nice visualization of a field trial layout. The output from this function can also be used as a masking layer for a raster input.    
-
 <img src="https://github.com/cb-agr/agriPlot/blob/main/Images/block_tests_example.png" alt="fieldBook Blocking example" height=500px>
 
-
-
 Shapefile vector in QGIS:
-
 <img src="https://github.com/cb-agr/agriPlot/blob/main/Images/fieldbook_blocks_QGIS.png" alt="fieldBook with blocked tests" height=500px>
 
-#### <u>agriPlotDim</u>
+### <u>agriPlotDim</u>
 
 **Description**
 
@@ -527,15 +508,13 @@ plotBounds <- elementBoundaries(dimSPDF,"id")
 plot(plotBounds)
 ```
 
-In the figure below, each rectangle represents a plot in the fieldBook with it's repsective dimensions. 
-
+In the figure below, each rectangle represents a plot in the fieldBook with it's repsective dimensions: 
 <img src="https://github.com/cb-agr/agriPlot/blob/main/Images/plot_bounds.png" alt="plot bounds" height=400px>
 
 Plot bounds in QGIS:
-
 <img src="https://github.com/cb-agr/agriPlot/blob/main/Images/plot_bounds_qgis.png" alt="plot bounds in QGIS" height=400px>
 
-#### Additional examples and geospatial analysis: 
+### Additional examples and geospatial analysis: 
 
 The following examples demonstrate how you can utilize your fieldBoundary or elementBoundries as a masking layer to extract information from a raster dataset. In this instance, we'll be using an EC (i.e. apparent soil electrical conductivity) map* for a field as our input raster. However, any raster dataset (e.g. NDVI, yield map, etc.) could be used.
 
@@ -547,8 +526,6 @@ plot(myECD,axes=TRUE)
 title("EC Deep (mS/m)")
 ```
 
-
-
 <img src="https://github.com/cb-agr/agriPlot/blob/main/Images/ec_deep_map.png" alt="EC Deep Map" height=500px>
 
 Add boundary for fieldBook (i.e. output from fieldBoundary):
@@ -556,8 +533,6 @@ Add boundary for fieldBook (i.e. output from fieldBoundary):
 ```R
 plot(myFieldBoundary,add=TRUE)
 ```
-
-
 
 <img src="https://github.com/cb-agr/agriPlot/blob/main/Images/ec_deep_w_field_boundary.png" alt="EC Deep with field boundary" height=500px>
 
@@ -579,7 +554,7 @@ text(myTests,"Blocks",cex=0.5)
 title("EC Deep (mS/m) and Field Tests")
 ```
 
-In this figure we have individual test boundaries overlayed on our EC Deep map. More than anything, it's a nice soil EC map that displays spatial variability across a field trial. If you had drone NDVI imagery, the same steps/concept would apply here as well. 
+In this figure we have individual test boundaries overlayed on our EC Deep map. More than anything, it's a nice soil EC map that displays spatial variability across a field trial. If you had drone NDVI imagery, the same steps/concept would apply here as well:
 
 <img src="https://github.com/cb-agr/agriPlot/blob/main/Images/ec_mask_with_test_blocks.png" alt="Mask Layer with test blocks" height=500px>
 
