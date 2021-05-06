@@ -1,4 +1,6 @@
-#this function takes an intial Longitude and Latitude and 
+# calcPlantingAngle.R
+#this function takes an intial Longitude and Latitude and terminal longitude and latitude, direction of rotation 
+# and planting direction returns a planting angle 
 
 calcPlantingAngle <- function(LongLat1,LongLat2,rotation,plantingDir){
   if(rotation == "cw" && plantingDir =="N/S"){
