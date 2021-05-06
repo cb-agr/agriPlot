@@ -75,11 +75,17 @@ agriPlot(fieldBook,initialLong,initialLat,rowSpacing,plotLength,rowColDir,planti
 ```
 
 **Arguments**
+
 fieldBook: either data.frame or data.table. fieldBook must have necessary header names.
+
 initialLong: the Longitude for the plot in column 1 and row 1.
+
 initialLat: the Latitude for the plot in column 1 and row 1.
-rowSpacing: this is the row spacing of your planter in **meters** (15 inch planter spacing = 0.381 meters, 30 inch planter spacing = 0.762 meters).  
+
+rowSpacing: this is the row spacing of your planter in **meters** (15 inch planter spacing = 0.381 meters, 30 inch planter spacing = 0.762 meters).
+
 plotLength: this is the <u>**total**</u> length of your plot in **meters**. This includes the planted portion of the plot and the alley (if an alley is applicable).
+
 rowColDir: this is the row and column orientation of your field.This is probably the most confusing part of the function, but let me explain.
 
 For North/South plantings:
@@ -89,7 +95,6 @@ The first two letters before the hyphen represent the row direction in which you
 - SN-EW – row numbers increase from South to North and column numbers increase from East to West
 - NS-WE – row numbers increase from North to South and column numbers increase from West to East
 - NS-EW – row numbers increase from North to South and column numbers increase from East to West 
-
 <img src="https://github.com/cb-agr/agriPlot/blob/main/Images/row_col_SNWE.svg" alt="SN-WE" width=400px height=400px>
 
 For East/West plantings:
@@ -99,7 +104,6 @@ The first two letters before the hyphen represent the column direction in which 
 - WE-NS – column numbers increase from West to East and row numbers increase from North to South
 - EW-SN – column numbers increase from East to West and row numbers increase from South to North
 - EW-NS – column numbers increase from East to West and row numbers increase from North to South
-
 <img src="https://github.com/cb-agr/agriPlot/blob/main/Images/ew_sn_agriplot.svg" alt="EW-SN" width=500px height=500px>
 
 plantingAngle: The angle you planted at. Values greater than 0 rotate your field in a counterclockwise direction and values less than 0 rotate your field in a clockwise direction. If you planted "perfectly" vertical or horizontal then your plantingAngle is 0. I recommend using calcPlantingAngle.R to find your planting angle if you don't know it. 
