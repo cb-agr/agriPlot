@@ -432,7 +432,7 @@ points(fbBoundGeom,cex=0.25)
 
 Field boundary with plot points.
 
-<img src="/Users/christopherbach/OneDrive/Development/agriPlot/Images/fieldbook_boundary_with_points.png" alt="fieldbook boundary with plot points" height=300px>
+<img src="https://github.com/cb-agr/agriPlot/blob/main/Images/fieldbook_boundary_with_points.png" alt="fieldbook boundary with plot points" height=300px>
 
 The figure below is the vector shapefile output in QGIS. Further uses might include exporting a KML file from QGIS and loading it into a GIS iPhone/Android application to take to the field. Notes: since this boundary only encloses single points representing plots, the area will be slightly smaller than the actual field area. If you want to account for the entire plot dimensions see agriPlotDim.  
 
