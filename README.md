@@ -1,6 +1,6 @@
 
 
- # agriPlot <img src= https://github.com/cb-agr/agriPlot/blob/main/Images/plotsNS.png alt="N/S Plots" height=30px> <img src=https://github.com/cb-agr/agriPlot/blob/main/Images/plotsEW.png alt="E/W Plots" height=30px>
+ # agriPlot <img src= https://github.com/cb-agr/agriPlot/blob/main/Images/plotsNS.png alt="N/S Plots" height=30px width=50px> <img src=https://github.com/cb-agr/agriPlot/blob/main/Images/plotsEW.png alt="E/W Plots" height=30px>
 
 agriPlot is a suite of practical geospatial tools for agricultural field research planning and analysis
 
@@ -90,9 +90,7 @@ The first two letters before the hyphen represent the row direction in which you
 - NS-WE – row numbers increase from North to South and column numbers increase from West to East
 - NS-EW – row numbers increase from North to South and column numbers increase from East to West 
 
-
-
-<img src="/Users/christopherbach/OneDrive/Development/agriPlot/Images/row_col_SNWE.svg" alt="SN-WE" style="height:500px">
+<img src="https://github.com/cb-agr/agriPlot/blob/main/Images/row_col_SNWE.svg" alt="SN-WE" style="height:500px">
 
 For East/West plantings:
 The first two letters before the hyphen represent the column direction in which your column numbers are increasing. The second two letters following the hyphen represent represents the row direction in which your row numbers are increasing. The are one of four East/West inputs to choose from.
@@ -102,7 +100,7 @@ The first two letters before the hyphen represent the column direction in which 
 - EW-SN – column numbers increase from East to West and row numbers increase from South to North
 - EW-NS – column numbers increase from East to West and row numbers increase from North to South
 
-<img src="/Users/christopherbach/OneDrive/Development/agriPlot/Images/ew_sn_agriplot.svg" alt="EW-SN" width=500px height=500px>
+<img src="https://github.com/cb-agr/agriPlot/blob/main/Images/ew_sn_agriplot.svg" alt="EW-SN" width=500px height=500px>
 
 plantingAngle: The angle you planted at. Values greater than 0 rotate your field in a counterclockwise direction and values less than 0 rotate your field in a clockwise direction. If you planted "perfectly" vertical or horizontal then your plantingAngle is 0. I recommend using calcPlantingAngle.R to find your planting angle if you don't know it. 
 
