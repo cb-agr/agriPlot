@@ -60,7 +60,7 @@ id: unique identifier for each plot. Can be numeric, character or alphanumeric (
 
 **Description**
 
-agriPlot is the core function that serves as input for all of the other functions outlined here. The input is a user fieldBook with specified header names. Users just have to enter a handful of inputs and agriPlot.R will output a latitude and longitude for each plot in your fieldBook. This output will be referred to as fieldBookLL.  
+agriPlot is the core function that serves as input for all of the other functions outlined here. The input is a user fieldBook with specified header names. Users just have to enter a handful of inputs and agriPlot will output a latitude and longitude for each plot in your fieldBook. This output will be referred to as fieldBookLL.  
 
 **Libraries**
 
@@ -104,7 +104,7 @@ The first two letters before the hyphen represent the column direction in which 
 - EW-NS – column numbers increase from East to West and row numbers increase from North to South
 <img src="https://github.com/cb-agr/agriPlot/blob/main/Images/ew_sn_agriplot.svg" alt="EW-SN" width=500px height=500px>
 
-plantingAngle: The angle you planted at. Values greater than 0 rotate your field in a counterclockwise direction and values less than 0 rotate your field in a clockwise direction. If you planted "perfectly" vertical or horizontal then your plantingAngle is 0. I recommend using calcPlantingAngle.R to find your planting angle if you don't know it. 
+plantingAngle: The angle you planted at. Values greater than 0 rotate your field in a counterclockwise direction and values less than 0 rotate your field in a clockwise direction. If you planted "perfectly" vertical or horizontal then your plantingAngle is 0. I recommend using calcPlantingAngle to find your planting angle if you don't know it. 
 
 **Examples**
 
@@ -278,7 +278,7 @@ Example output of pivot track point coordinates (in green) plotted using QGIS:
 
 **Description**
 
-findIntersectingPlots.R takes a fieldBookLL (i.e. output from agriPlot) and a given set of coordinates (i.e. pointsOfInterest) and outputs intersecting plots at a user-specified distance. 
+findIntersectingPlots takes a fieldBookLL (i.e. output from agriPlot) and a given set of coordinates (i.e. pointsOfInterest) and outputs intersecting plots at a user-specified distance. 
 
 **Libraries**
 
@@ -347,7 +347,7 @@ library(sp)
 
 **Arguments**
 
-fieldBookLL: agriPlot.R fieldBook output with Longitiude and Latitude for each plot
+fieldBookLL: agriPlot fieldBook output with Longitiude and Latitude for each plot
 coordRefSys: this the coordinate reference system (CRS) you wish to assign to your Spatial Points Data Frame. 
 
 Using coordRefSys = "default" sets the CRS to:
@@ -482,7 +482,7 @@ Shapefile vector in QGIS:
 
 **Description**
 
-Displaying a plot as one point has some shortcommings because it doesn't account for the entire dimensions of a plot. If this is of interest, users can compute a longitude and latitude for all four corners of a plot's dimensions using agriPlotDim.R. The output from agriPlotDim would represent the most accurate field boundary as it accounts for plot dimensions. It should be noted that the output of this function only contains the following headers: id, block, plotRowNum, plotColumnNum, plotRows, testNameRep, Longitude, Latitude.
+Displaying a plot as one point has some shortcommings because it doesn't account for the entire dimensions of a plot. If this is of interest, users can compute a longitude and latitude for all four corners of a plot's dimensions using agriPlotDim. The output from agriPlotDim would represent the most accurate field boundary as it accounts for plot dimensions. It should be noted that the output of this function only contains the following headers: id, block, plotRowNum, plotColumnNum, plotRows, testNameRep, Longitude, Latitude.
 
 **Usage**
 
@@ -493,6 +493,7 @@ agriPlotDim(fieldBookLL,buffer)
 **Arguments**
 
 fieldBookLL: fieldbook output from agriPlot with longitude and latitude for each plot
+
 buffer: plot dimension multiplier from 0 < 1. You can think of this as how much of the plot dimensions do you want to include. A value of 1 would be the entire plot dimensions. I might recommend using 0.8 to roughly account for the alley space of a plot. 
 
 **Examples**
@@ -501,14 +502,14 @@ buffer: plot dimension multiplier from 0 < 1. You can think of this as how much 
 myFBDim <- agriPlotDim(fbLL,0.8)
 ```
 
-In the following example I'll demonstrate how you can visualize plots using agriPlotDim and passing it through the elementBoundaries function to generate individual plots. 
+In the following example I'll demonstrate how you can visualize plots using agriPlotDim and passing it through the encloseVarBoundaries function to generate individual plots. 
 
 ```R
 myFb <- read.csv("agriPLot_fb_sample.csv")
 myFBLL <- agriPlot(myFb,-96.4944759,41.1636251,0.762,4,"SN-WE",0)
 myFBDim <- agriPlotDim(fbLL,0.8)
 dimSPDF <- fbLLToSPDF(apLLBuff,"default")
-plotBounds <- elementBoundaries(dimSPDF,"id")
+plotBounds <- encloseVarBoundaries(dimSPDF,"id")
 plot(plotBounds)
 ```
 
@@ -522,7 +523,7 @@ Plot bounds in QGIS:
 
 ### Additional examples and geospatial analysis: 
 
-The following examples demonstrate how you can utilize your fieldBoundary or elementBoundries as a masking layer to extract information from a raster dataset. In this instance, we'll be using an EC (i.e. apparent soil electrical conductivity) map* for a field as our input raster. However, any raster dataset (e.g. NDVI, yield map, etc.) could be used.
+The following examples demonstrate how you can utilize your fieldBoundary or encloseVarBoundaries as a masking layer to extract information from a raster dataset. In this instance, we'll be using an EC (i.e. apparent soil electrical conductivity) map* for a field as our input raster. However, any raster dataset (e.g. NDVI, yield map, etc.) could be used.
 
 EC Deep map:
 
