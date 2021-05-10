@@ -299,7 +299,9 @@ findIntersectingPlots(fieldBookLL,pointsOfInterest,distance)
 **Arguments**
 
 fieldbookLL: agriPlot fieldBook output with Longitiude and Latitude for each plot 
+
 pointsOfInterest: Longitude and Latitude coordinates for points of interest. Input should be dataframe or matrix. 
+
 distance: the distance threshold in **meters** for where a plot intersects with a points of interest. Plots that have a distance less than the threshold are output as intersecting.
 
 **Examples**
