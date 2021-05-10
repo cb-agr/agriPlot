@@ -3,5 +3,5 @@
 fbSPDFRemoveBorder <- function(fieldBookLLSPDF,borderName){
   spdf <- fieldBookLLSPDF
   spdf_sub <- subset(spdf, testName!=borderName)
-  spdf_sub
+  return(spdf_sub)
 }
