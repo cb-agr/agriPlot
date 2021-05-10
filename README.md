@@ -169,9 +169,13 @@ demoFieldBook(beginRow,endRow,beginColumn,endColumn,plotRows)
 **Arguments**
 
 beginRow: the row value you start at. Must be an integer.
+
 endRow: the row value you end at. Must be an integer.
+
 beginColumn: the column value you start at. Must be an integer.
+
 endColumn: the column value you end at. Must be an integer.
+
 plotRows: number of plots per row associated with the specified rows and columns. Must be an integer.
 
 **Examples**
