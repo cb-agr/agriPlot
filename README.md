@@ -356,6 +356,7 @@ library(sp)
 **Arguments**
 
 fieldBookLL: agriPlot fieldBook output with Longitiude and Latitude for each plot
+
 coordRefSys: this the coordinate reference system (CRS) you wish to assign to your Spatial Points Data Frame. 
 
 Using coordRefSys = "default" sets the CRS to:
@@ -417,7 +418,7 @@ Plot boundary using "plot" in R.
 plot(fbBoundary,axes=TRUE)
 ```
 
-The figure shown here is a rectangular polygon field boundary that encloses all plots. The output from this function can also be used as a masking layer for a raster input:
+The figure shown here is a rectangular polygon field boundary that encloses all plots. The output from this function can also be used as a masking layer for a raster input (see Additional examples and geospatial analysis):
 
 <img src="https://github.com/cb-agr/agriPlot/blob/main/Images/fbboundaryoutput.png" alt="Field Boundary" height=300px>
 
