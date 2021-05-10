@@ -34,7 +34,7 @@ fieldBoundary --> raster_analysis;
 
 ```
 
-### <u>fieldBook input:</u>
+### fieldBook input:
 
 Your fieldbook input can have any number of attributes but there are a handful of header names that are **essential** for agriPlot to work. Please see agriPlot_fb_sample.csv as an example fieldbook in the Sample_data folder. 
 
@@ -264,8 +264,10 @@ pivotTracksLL(radin, cpLong, cpLat)
 
 **Arguments**
 
-radin: is the radius of each pivot track in <u>**meters**</u>. Values can be stored using e.g.: c(54.577,103.475,152.119,200.906,263.136,325.574,387.55) where each comma separated value represents a track radius. Radius measurements for radin should be taken as close as possible to the center of the pivot stop and to the end of each respective track. 
+radin: is the radius of each pivot track in **meters**. Values can be stored using e.g.: c(54.577,103.475,152.119,200.906,263.136,325.574,387.55) where each comma separated value represents a track radius. Radius measurements for radin should be taken as close as possible to the center of the pivot stop and to the end of each respective track. 
+
 cpLong: This is longitude coordinate for the center pivot. Should be taken right at the very center of the pivot stop. 
+
 cpLat: This is latitude coordinate for the center pivot. Should be taken right at the very center of the pivot stop.
 
 **Examples**
