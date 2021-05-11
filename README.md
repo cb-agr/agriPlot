@@ -34,7 +34,7 @@ fieldBoundary --> raster_analysis;
 
 ```
 
-### <u>fieldBook input:</u>
+### fieldBook input:
 
 Your fieldbook input can have any number of attributes but there are a handful of header names that are **essential** for agriPlot to work. Please see agriPlot_fb_sample.csv as an example fieldbook in the Sample_data folder. 
 
@@ -48,7 +48,7 @@ plotColumnNum: contains your fieldbook column numbers associated with each respe
 
 plotRows: this is the number of rows per plot. This might be a 2-row, 4-row or 6-row plot, etc. A fieldBook can have multiple plotRows. 
 
-testName: corresponding name of the test associated with the plot you're evaluating. Please don't allow for any whitespace in the testName. Can be numeric, character or alphanumeric. 
+testName: corresponding name of the test associated with the plot you're evaluating. Please don't allow for whitespace in the testName. Can be numeric, character or alphanumeric. 
 
 repNum: the replication number associated with the testName (i.e. 1,2,3). Must be an integer. 
 
@@ -169,9 +169,13 @@ demoFieldBook(beginRow,endRow,beginColumn,endColumn,plotRows)
 **Arguments**
 
 beginRow: the row value you start at. Must be an integer.
+
 endRow: the row value you end at. Must be an integer.
+
 beginColumn: the column value you start at. Must be an integer.
+
 endColumn: the column value you end at. Must be an integer.
+
 plotRows: number of plots per row associated with the specified rows and columns. Must be an integer.
 
 **Examples**
@@ -260,8 +264,10 @@ pivotTracksLL(radin, cpLong, cpLat)
 
 **Arguments**
 
-radin: is the radius of each pivot track in <u>**meters**</u>. Values can be stored using e.g.: c(54.577,103.475,152.119,200.906,263.136,325.574,387.55) where each comma separated value represents a track radius. Radius measurements for radin should be taken as close as possible to the center of the pivot stop and to the end of each respective track. 
+radin: is the radius of each pivot track in **meters**. Values can be stored using e.g.: c(54.577,103.475,152.119,200.906,263.136,325.574,387.55) where each comma separated value represents a track radius. Radius measurements for radin should be taken as close as possible to the center of the pivot stop and to the end of each respective track. 
+
 cpLong: This is longitude coordinate for the center pivot. Should be taken right at the very center of the pivot stop. 
+
 cpLat: This is latitude coordinate for the center pivot. Should be taken right at the very center of the pivot stop.
 
 **Examples**
@@ -293,7 +299,9 @@ findIntersectingPlots(fieldBookLL,pointsOfInterest,distance)
 **Arguments**
 
 fieldbookLL: agriPlot fieldBook output with Longitiude and Latitude for each plot 
+
 pointsOfInterest: Longitude and Latitude coordinates for points of interest. Input should be dataframe or matrix. 
+
 distance: the distance threshold in **meters** for where a plot intersects with a points of interest. Plots that have a distance less than the threshold are output as intersecting.
 
 **Examples**
@@ -307,10 +315,10 @@ fbLLintersection <- findIntersectingPlots(fbLL,pivotLL,3)
 For starters, any set of pointsofInterest can be used. But in the following example we'll demonstrate how to use the function to find plots that intersect with pivot tracks. This is useful for mapping border plots into pivot tracks. **Note, if you shift your field trial in any direction, you need to be aware that plot intersections may change as well!!!** So if you're doing this in practice you should add a little extra border in pivot tracks based on the intersections for good measure to allow for any minor adjustments during planting. 
 
 ```R
-agD <- demoFieldBook(1,60,1,37,4)
-agDLL <- agriDemoPlot(agD,-96.4535927,41.1819774,0.762,4,"SN-WE",0)
+myFB <- read.csv("agriPlot_fb_sample.csv")
+myFBLL <- agriPlot(myFB,-96.4535927,41.1819774,0.762,4,"SN-WE",0)
 pivLL <- pivotTracksLL(c(55,109.5,163.249,217.919,272.5,326.718),-96.45504366,41.18194751)
-myInt <- pivotPlotsIntersection(agDLL,pivLL,3)
+myInt <- pivotPlotsIntersection(myFBLL,pivLL,3)
 ```
 
 Pivot tracks (in green), fieldBook plots (in brown) and plots intersecting with pivot tracks (in red):
@@ -348,6 +356,7 @@ library(sp)
 **Arguments**
 
 fieldBookLL: agriPlot fieldBook output with Longitiude and Latitude for each plot
+
 coordRefSys: this the coordinate reference system (CRS) you wish to assign to your Spatial Points Data Frame. 
 
 Using coordRefSys = "default" sets the CRS to:
@@ -395,9 +404,9 @@ fbBoundary <- fieldBoundary(fbSPDF)
 ```
 
 ```R
-read.csv <- "agriPlot_fb_sample.csv"
-sampleNLL <- agriPlot(sample,-96.4106204,41.1467745,0.762,4,0,"SN-WE")
-fbSPDF <- fieldBookLLToSPDF(agDLL, coordRefSys = "default")
+myFB <- read.csv("agriPlot_fb_sample.csv")
+myFBLL <- agriPlot(myFB,-96.4106204,41.1467745,0.762,4,0,"SN-WE")
+fbSPDF <- fieldBookLLToSPDF(myFBLL, coordRefSys = "default")
 fbBoundary <- fieldBoundary(fbSPDF)
 #write shapefile
 shapefile(fbBoundary,"myfieldboundary")
@@ -409,7 +418,7 @@ Plot boundary using "plot" in R.
 plot(fbBoundary,axes=TRUE)
 ```
 
-The figure shown here is a rectangular polygon field boundary that encloses all plots. The output from this function can also be used as a masking layer for a raster input:
+The figure shown here is a rectangular polygon field boundary that encloses all plots. The output from this function can also be used as a masking layer for a raster input (see Additional examples and geospatial analysis):
 
 <img src="https://github.com/cb-agr/agriPlot/blob/main/Images/fbboundaryoutput.png" alt="Field Boundary" height=300px>
 
