@@ -28,8 +28,6 @@ fieldBookLL --> findIntersectingPlots;
 fieldBookLL --> fbLLToSPDF;
 fbLLToSPDF --> encloseVarBoundaries;
 fbLLToSPDF --> fieldBoundary;
-encloseVarBoundaries --> raster_analysis;
-fieldBoundary --> raster_analysis;
 
 ```
 
