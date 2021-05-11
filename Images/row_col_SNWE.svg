@@ -25,8 +25,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.55814684"
-     inkscape:cx="719.35825"
-     inkscape:cy="570.83477"
+     inkscape:cx="204.26083"
+     inkscape:cy="409.58688"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      inkscape:document-rotation="0"
@@ -112,12 +112,12 @@
     <text
        xml:space="preserve"
        style="font-size:4.5861px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';stroke-width:0.264583"
-       x="49.608196"
+       x="50.082233"
        y="259.2886"
        id="text32-3"><tspan
          sodipodi:role="line"
          id="tspan30-8"
-         x="49.608196"
+         x="50.082233"
          y="259.2886"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.76111px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:0.264583">1</tspan></text>
     <text
@@ -156,23 +156,23 @@
     <text
        xml:space="preserve"
        style="font-size:4.5861px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';stroke-width:0.264583"
-       x="112.46346"
+       x="113.5218"
        y="259.14035"
        id="text32-3-4-9-7-7"><tspan
          sodipodi:role="line"
          id="tspan30-8-0-3-5-2"
-         x="112.46346"
+         x="113.5218"
          y="259.14035"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.76111px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:0.264583">5</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:4.5861px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';stroke-width:0.264583"
-       x="128.84393"
+       x="129.90225"
        y="258.75943"
        id="text32-3-4-9-7-7-7"><tspan
          sodipodi:role="line"
          id="tspan30-8-0-3-5-2-5"
-         x="128.84393"
+         x="129.90225"
          y="258.75943"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.76111px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:0.264583">6</tspan></text>
     <text
@@ -199,27 +199,27 @@
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.76111px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:0.264583">8</tspan></text>
     <text
        xml:space="preserve"
-       style="font-size:4.5861px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';stroke-width:0.264583"
-       x="67.687714"
-       y="275.99112"
+       style="font-size:8.46667px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';stroke-width:0.264583"
+       x="64.512711"
+       y="277.57864"
        id="text32-3-1"><tspan
          sodipodi:role="line"
          id="tspan30-8-8"
-         x="67.687714"
-         y="275.99112"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.76111px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:0.264583">Column (X/Longitude)</tspan></text>
+         x="64.512711"
+         y="277.57864"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8.46667px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:0.264583">Column (X/Longitude)</tspan></text>
     <text
        xml:space="preserve"
-       style="font-size:4.5861px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';stroke-width:0.264583"
-       x="-171.27194"
-       y="13.256271"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8.46667px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:0.264583"
+       x="-174.96591"
+       y="12.162857"
        id="text32-3-1-5"
        transform="rotate(-90.54332)"><tspan
          sodipodi:role="line"
          id="tspan30-8-8-7"
-         x="-171.27194"
-         y="13.256271"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.76111px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:0.264583">Row (Y/Latitude)</tspan></text>
+         x="-174.96591"
+         y="12.162857"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8.46667px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:0.264583">Row (Y/Latitude)</tspan></text>
     <circle
        id="path1179"
        style="fill:#000080;stroke:#000000;stroke-width:0.264583"
