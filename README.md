@@ -19,17 +19,9 @@ The analysis performed by all the functions is accurate. However, when using thi
 
 Primary Workflow
 
-```mermaid
-graph TD;
-fieldBook -->agriPlot;
-agriPlot -->fieldBookLL;
-fieldBookLL --> plotLeaflet;
-fieldBookLL --> findIntersectingPlots;
-fieldBookLL --> fbLLToSPDF;
-fbLLToSPDF --> encloseVarBoundaries;
-fbLLToSPDF --> fieldBoundary;
-
-```
+<p align="center">
+<img src="https://github.com/cb-agr/agriPlot/blob/main/Images/workflow.png" alt="Workflow" width=400px height=400px>
+</p>
 
 ### fieldBook input
 
@@ -142,13 +134,13 @@ LongLat2: the is the terminal longitude and latitude for where your first planti
 
 rotation: direction you will be rotating field. There are one of two inputs to select from (arguments must be in quotes):
 
-*"cw" - clockwise
-*"ccw" - counter-clockwise
+* "cw" - clockwise
+* "ccw" - counter-clockwise
 
 plantingDir: the direction you will be planting. There are one of two inputs to select from. 
 
-*"N/S" - north/south planting direction
-*"E/W" - east/west planting direction
+* "N/S" - north/south planting direction
+* "E/W" - east/west planting direction
 
 **Example**
 
