@@ -20,7 +20,7 @@ The analysis performed by all the functions is accurate. However, when using thi
 Primary Workflow
 
 <p align="center">
-<img src="https://github.com/cb-agr/agriPlot/blob/main/Images/workflow.png" alt="Workflow" width=400px height=400px>
+<img src="https://github.com/cb-agr/agriPlot/blob/main/Images/workflow.png" alt="Workflow" width=500px height=700px>
 </p>
 
 ### fieldBook input
