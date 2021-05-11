@@ -315,10 +315,10 @@ fbLLintersection <- findIntersectingPlots(fbLL,pivotLL,3)
 For starters, any set of pointsofInterest can be used. But in the following example we'll demonstrate how to use the function to find plots that intersect with pivot tracks. This is useful for mapping border plots into pivot tracks. **Note, if you shift your field trial in any direction, you need to be aware that plot intersections may change as well!!!** So if you're doing this in practice you should add a little extra border in pivot tracks based on the intersections for good measure to allow for any minor adjustments during planting. 
 
 ```R
-agD <- demoFieldBook(1,60,1,37,4)
-agDLL <- agriDemoPlot(agD,-96.4535927,41.1819774,0.762,4,"SN-WE",0)
+myFB <- read.csv("agriPlot_fb_sample.csv")
+myFBLL <- agriPlot(myFB,-96.4535927,41.1819774,0.762,4,"SN-WE",0)
 pivLL <- pivotTracksLL(c(55,109.5,163.249,217.919,272.5,326.718),-96.45504366,41.18194751)
-myInt <- pivotPlotsIntersection(agDLL,pivLL,3)
+myInt <- pivotPlotsIntersection(myFBLL,pivLL,3)
 ```
 
 Pivot tracks (in green), fieldBook plots (in brown) and plots intersecting with pivot tracks (in red):
@@ -404,9 +404,9 @@ fbBoundary <- fieldBoundary(fbSPDF)
 ```
 
 ```R
-read.csv <- "agriPlot_fb_sample.csv"
-sampleNLL <- agriPlot(sample,-96.4106204,41.1467745,0.762,4,0,"SN-WE")
-fbSPDF <- fieldBookLLToSPDF(agDLL, coordRefSys = "default")
+myFB <- read.csv("agriPlot_fb_sample.csv")
+myFBLL <- agriPlot(myFB,-96.4106204,41.1467745,0.762,4,0,"SN-WE")
+fbSPDF <- fieldBookLLToSPDF(myFBLL, coordRefSys = "default")
 fbBoundary <- fieldBoundary(fbSPDF)
 #write shapefile
 shapefile(fbBoundary,"myfieldboundary")
