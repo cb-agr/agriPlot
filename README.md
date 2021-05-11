@@ -120,7 +120,7 @@ Example agriPlot output with Long/Lat computed for each plot. Point coordinates 
 
 **Description**
 
-Calculates planting angle based on an initial longitude and longitude, terminal longitude and latitude, direction of rotation and planting direction.
+Calculates planting angle based on an initial longitude and longitude, terminal longitude and latitude, direction of rotation and planting direction. 
 
 **Usage**
 
