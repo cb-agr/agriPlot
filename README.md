@@ -1,5 +1,4 @@
 
-
 # agriPlot <img src= https://github.com/cb-agr/agriPlot/blob/main/Images/plotsNS.png alt="N/S Plots" height=40px> <img src=https://github.com/cb-agr/agriPlot/blob/main/Images/plotsEW.png alt="E/W Plots" height=30px>
 
 agriPlot is a suite of practical geospatial tools for agricultural field research planning and analysis
@@ -10,15 +9,15 @@ The core R function of agriPlot (i.e. agriPlot) takes a fieldbook that is compri
 
 ## What is a fieldbook?
 
-A fieldbook represents some agricultural field research experiment wherein the row and column for every plot has a corresponding treatment and/or test and may also contain any other important attribute. agriPlot should be able to accept any agricultural field research design (i.e. randomized complete block, incomplete block, augmented design, etc.) so long as each plot has a row and column value. 
+A fieldbook represents some agricultural field research experiment wherein the row and column for every plot has a corresponding treatment and/or test and may also contain any other important attribute. agriPlot should be able to accept any agricultural field research design (i.e. randomized complete block, incomplete block, augmented design, etc.) so long as each plot has a row and column value.
 
 ## Accuracy
 
-The analysis performed by all the functions is accurate. However, when using this program, it should be important that results are ground-truthed before final implementation of a field trial design. 
+The analysis performed by all the functions is accurate. However, when using this program, it should be important that results are ground-truthed before final implementation of a field trial design.
 
 ## Documentation
 
-Primary Workflow 
+Primary Workflow
 
 ```mermaid
 graph TD;
@@ -34,7 +33,7 @@ fieldBoundary --> raster_analysis;
 
 ```
 
-### fieldBook input:
+### fieldBook input
 
 Your fieldbook input can have any number of attributes but there are a handful of header names that are **essential** for agriPlot to work. Please see agriPlot_fb_sample.csv as an example fieldbook in the Sample_data folder. 
 
@@ -48,7 +47,7 @@ plotColumnNum: contains your fieldbook column numbers associated with each respe
 
 plotRows: this is the number of rows per plot. This might be a 2-row, 4-row or 6-row plot, etc. A fieldBook can have multiple plotRows. 
 
-testName: corresponding name of the test associated with the plot you're evaluating. Please don't allow for whitespace in the testName. Can be numeric, character or alphanumeric. 
+testName: corresponding name of the test associated with the plot you're evaluating. Please don't allow for whitespace in the testName. Can be numeric, character or alphanumeric.
 
 repNum: the replication number associated with the testName (i.e. 1,2,3). Must be an integer. 
 
@@ -56,7 +55,7 @@ block: block associated with each testName.
 
 id: unique identifier for each plot. Can be numeric, character or alphanumeric (i.e. 101,102,103 or plot101,plot102,plot103)
 
-### argiPlot:
+### argiPlot
 
 **Description**
 
@@ -82,7 +81,7 @@ initialLat: the Latitude for the plot in column 1 and row 1.
 
 rowSpacing: this is the row spacing of your planter in **meters** (15 inch planter spacing = 0.381 meters, 30 inch planter spacing = 0.762 meters).
 
-plotLength: this is the <u>**total**</u> length of your plot in **meters**. This includes the planted portion of the plot and the alley (if an alley is applicable).
+plotLength: this is the **total** length of your plot in **meters**. This includes the planted portion of the plot and the alley (if an alley is applicable).
 
 rowColDir: this is the row and column orientation of your field.This is probably the most confusing part of the function, but let me explain.
 
@@ -92,8 +91,11 @@ The first two letters before the hyphen represent the row direction in which you
 - SN-WE – row numbers increase from South to North and column numbers increase from West to East
 - SN-EW – row numbers increase from South to North and column numbers increase from East to West
 - NS-WE – row numbers increase from North to South and column numbers increase from West to East
-- NS-EW – row numbers increase from North to South and column numbers increase from East to West 
+- NS-EW – row numbers increase from North to South and column numbers increase from East to West
+
+<p align="center">
 <img src="https://github.com/cb-agr/agriPlot/blob/main/Images/row_col_SNWE.svg" alt="SN-WE" width=400px height=400px>
+</p>
 
 For East/West plantings:
 The first two letters before the hyphen represent the column direction in which your column numbers are increasing. The second two letters following the hyphen represent represents the row direction in which your row numbers are increasing. The are one of four East/West inputs to choose from.
@@ -102,21 +104,27 @@ The first two letters before the hyphen represent the column direction in which 
 - WE-NS – column numbers increase from West to East and row numbers increase from North to South
 - EW-SN – column numbers increase from East to West and row numbers increase from South to North
 - EW-NS – column numbers increase from East to West and row numbers increase from North to South
-<img src="https://github.com/cb-agr/agriPlot/blob/main/Images/ew_sn_agriplot.svg" alt="EW-SN" width=500px height=500px>
 
-plantingAngle: The angle you planted at. Values greater than 0 rotate your field in a counterclockwise direction and values less than 0 rotate your field in a clockwise direction. If you planted "perfectly" vertical or horizontal then your plantingAngle is 0. I recommend using calcPlantingAngle to find your planting angle if you don't know it. 
+<p align="center">
+<img src="https://github.com/cb-agr/agriPlot/blob/main/Images/ew_sn_agriplot.svg" alt="EW-SN" width=500px height=500px>
+</p>
+
+plantingAngle: The angle you planted at. Values greater than 0 rotate your field in a counterclockwise direction and values less than 0 rotate your field in a clockwise direction. If you planted "perfectly" vertical or horizontal then your plantingAngle is 0. I recommend using calcPlantingAngle to find your planting angle if you don't know it.
 
 **Examples**
 
 ```R
-fbLL <- agriplot(my2021FieldBook,-98.13135,40.89407,0.762,4,"WE-NS",0)
+myFB <- read.csv("agriPlot_fb_sample.csv")
+myFBLL <- agriplot(myFB,-98.13135,40.89407,0.762,4,"WE-NS",0)
 ```
 
-Example agriPlot output with Long/Lat computed for each plot. Point coordinates representing each plot within a fieldBook were plotted in QGIS with a satellite imagery base layer. With QGIS a user can nicely visualize how their field trial is positioned in a field. 
+Example agriPlot output with Long/Lat computed for each plot. Point coordinates representing each plot within a fieldBook were plotted in QGIS with a satellite imagery base layer. With QGIS a user can nicely visualize how their field trial is positioned in a field.
 
-<img src="https://github.com/cb-agr/agriPlot/blob/main/Images/fieldplotpic.png" alt="FieldPlotPic" height=350px>
+<p align="center">
+	<img src="https://github.com/cb-agr/agriPlot/blob/main/Images/fieldplotpic.png" alt="FieldPlotPic" height=350px>
+</p>
 
-### calcPlantingAngle:
+### calcPlantingAngle
 
 **Description**
 
@@ -130,19 +138,19 @@ calcPlantingAngle(LongLat1,LongLat2,rotation,plantingDir)
 
 **Arguments**
 
-LongLat1: this is the initial longitude and latitude of where you plan to begin planting. Values should be stored as c(-98.1878745,40.8915224). 
+LongLat1: this is the initial longitude and latitude of where you plan to begin planting. Values should be stored as c(-98.1878745,40.8915224).
 
 LongLat2: the is the terminal longitude and latitude for where your first planting row will end. Values should be stored as c(-98.1878745,40.8915224).
 
 rotation: direction you will be rotating field. There are one of two inputs to select from (arguments must be in quotes):
 
-* "cw" - clockwise
-* "ccw" - counter-clockwise
+*"cw" - clockwise
+*"ccw" - counter-clockwise
 
 plantingDir: the direction you will be planting. There are one of two inputs to select from. 
 
-* "N/S" - north/south planting direction
-* "E/W" - east/west planting direction
+*"N/S" - north/south planting direction
+*"E/W" - east/west planting direction
 
 **Example**
 
@@ -150,7 +158,7 @@ plantingDir: the direction you will be planting. There are one of two inputs to 
 calcPlantingAngle(c(-98.1878745,40.8915224),c(-98.1846696,40.8909628),"cw","E/W")
 ```
 
-### <u>demoFieldBook</u>:
+### demoFieldBook
 
 **Description**
 
@@ -191,7 +199,7 @@ demoFBList <- list(A=demoFieldBook(1,50,1,6,2),B=demoFieldBook(1,50,7,12,4),C=de
 demoFB <- do.call(rbind,demoFBList)
 ```
 
-### agriDemoPlot:
+### agriDemoPlot
 
 **Description**
 
@@ -215,7 +223,7 @@ demoFB <- do.call(rbind,demoFBList)
 demoFBLL <- agriDemoPlot(demoFB,-98.13135,40.89407,0.762,4,"SN-WE",0)
 ```
 
-### plotLeaflet:
+### plotLeaflet
 
 **Description**
 
@@ -233,7 +241,7 @@ plotLeaflet(fieldBookLL)
 
 **Arguments**
 
-fieldBookLL: fieldBook with Latitude and Longitude for plots 
+fieldBookLL: fieldBook with Latitude and Longitude for plots (i.e. output from agriPlot)
 
 **Examples**
 
@@ -244,9 +252,11 @@ leafletPlot
 
 Example output:
 
+<p align="center">
 <img src="https://github.com/cb-agr/agriPlot/blob/main/Images/leaflet_plotPic.png" alt="Leaflet plot pic" width=500px>
+</p>
 
-### pivotTracksLL:
+### pivotTracksLL
 
 **Description**
 
@@ -278,13 +288,15 @@ pivLL <- pivotTracksLL(c(55,109.5,163.249,217.919,272.5,326.718),-96.45504366,41
 
 Example output of pivot track point coordinates (in green) plotted using QGIS: 
 
+<p align="center">
 <img src="https://github.com/cb-agr/agriPlot/blob/main/Images/pivot_tracks.png" alt="pivot tracks" width=450px>
+</p>
 
-### findIntersectingPlots:
+### findIntersectingPlots
 
 **Description**
 
-findIntersectingPlots takes a fieldBookLL (i.e. output from agriPlot) and a given set of coordinates (i.e. pointsOfInterest) and outputs intersecting plots at a user-specified distance. 
+findIntersectingPlots takes a fieldBookLL (i.e. output from agriPlot) and a given set of coordinates (i.e. pointsOfInterest) and outputs intersecting plots at a user-specified distance.
 
 **Libraries**
 
@@ -323,21 +335,29 @@ myInt <- pivotPlotsIntersection(myFBLL,pivLL,3)
 
 Pivot tracks (in green), fieldBook plots (in brown) and plots intersecting with pivot tracks (in red):
 
+<p align="center">
 <img src="https://github.com/cb-agr/agriPlot/blob/main/Images/plots_intersecting_pivot.png" alt="Pivot tracks intersection" width=450px height=400px>
+</p>
 
 Plots intersecting with pivot tracks:
 
+<p align="center">
 <img src="https://github.com/cb-agr/agriPlot/blob/main/Images/plots_only_intersect.png" alt="Pivot tracks intersection" width=300px height=400px>
+</p>
 
 In the following example, maybe you've mapped a drainage pattern (in pink) and would like to plant a border in that area:
 
+<p align="center">
 <img src="https://github.com/cb-agr/agriPlot/blob/main/Images/drainage_field.png" alt="Drainage pattern and field plots" height=400px>
+</p>
 
 Intersecting plots:
 
+<p align="center">
 <img src="https://github.com/cb-agr/agriPlot/blob/main/Images/drainage_intersection.png" alt="Plots that intersect with drainage" height=400px>
+</p>
 
-### fbLLToSPDF:
+### fbLLToSPDF
 
 **Usage**
 
@@ -347,7 +367,7 @@ fbLLToSPDF(fieldBookLL,coordRefSys)
 
 **Description**
 
-This function takes a fieldBookLL and converts it to a Spatial Points Data Frame (i.e.SDPF) using the library spatial points. This is an important transition in the workflow as the fieldBook is now a spatial object. This allows for more advanced spatial analysis/operations to be exectuted with libraries such as raster, rgeos, etc. 
+This function takes a fieldBookLL and converts it to a Spatial Points Data Frame (i.e.SDPF) using the library spatial points. This is an important transition in the workflow as the fieldBook is now a spatial object. This allows for more advanced spatial analysis/operations to be exectuted with libraries such as raster, rgeos, etc.
 
 **Libraries**
 
@@ -357,7 +377,7 @@ library(sp)
 
 fieldBookLL: agriPlot fieldBook output with Longitiude and Latitude for each plot
 
-coordRefSys: this the coordinate reference system (CRS) you wish to assign to your Spatial Points Data Frame. 
+coordRefSys: this the coordinate reference system (CRS) you wish to assign to your Spatial Points Data Frame.
 
 Using coordRefSys = "default" sets the CRS to:
 
@@ -377,7 +397,7 @@ Example using other CRS:
 myfbSPDF <- fbLLToSPDF(my2021FBLL,coordRefSys="EPSG:3857") # WGS84 / Psuedo-Mercator
 ```
 
-#### fieldBoundary:
+#### fieldBoundary
 
 **Description**
 
@@ -420,7 +440,9 @@ plot(fbBoundary,axes=TRUE)
 
 The figure shown here is a rectangular polygon field boundary that encloses all plots. The output from this function can also be used as a masking layer for a raster input (see Additional examples and geospatial analysis):
 
+<p align="center">
 <img src="https://github.com/cb-agr/agriPlot/blob/main/Images/fbboundaryoutput.png" alt="Field Boundary" height=300px>
+</p>
 
 ```R
 #add plot points
@@ -429,12 +451,17 @@ points(fbBoundGeom,cex=0.25)
 
 Field boundary with plot points:
 
+<p align="center">
 <img src="https://github.com/cb-agr/agriPlot/blob/main/Images/fieldbook_boundary_with_points.png" alt="fieldbook boundary with plot points" height=300px>
+</p>
 
 The figure below is the vector shapefile output in QGIS. Further uses might include exporting a KML file from QGIS and loading it into a GIS iPhone/Android application to take to the field. Notes: since this boundary only encloses single points representing plots, the area will be slightly smaller than the actual field area. If you want to account for the entire plot dimensions see agriPlotDim.  
-<img src="https://github.com/cb-agr/agriPlot/blob/main/Images/field_boundaries.png" alt="field boundary in QGIS" height=300px>
 
-### encloseVarBoundaries:
+<p align="center">
+<img src="https://github.com/cb-agr/agriPlot/blob/main/Images/field_boundaries.png" alt="field boundary in QGIS" height=300px>
+</p>
+
+### encloseVarBoundaries
 
 **Usage**
 
@@ -481,13 +508,17 @@ text(myTests,"blocks",cex=0.5)
 
 In the figure below, the plots associated with each test are enclosed in their own repsective polygon. This is one method for a nice visualization of a field trial layout. The output from this function can also be used as a masking layer for a raster input:
 
+<p align="center">
 <img src="https://github.com/cb-agr/agriPlot/blob/main/Images/block_tests_example.png" alt="fieldBook Blocking example" height=500px>
+</p>
 
 Shapefile vector in QGIS:
 
+<p align="center">
 <img src="https://github.com/cb-agr/agriPlot/blob/main/Images/fieldbook_blocks_QGIS.png" alt="fieldBook with blocked tests" height=500px>
+</p>
 
-### agriPlotDim:
+### agriPlotDim
 
 **Description**
 
@@ -524,13 +555,17 @@ plot(plotBounds)
 
 In the figure below, each rectangle represents a plot in the fieldBook with it's repsective dimensions:
 
+<p align="center">
 <img src="https://github.com/cb-agr/agriPlot/blob/main/Images/plot_bounds.png" alt="plot bounds" height=400px>
+</p>
 
 Plot bounds in QGIS:
 
+<p align="center">
 <img src="https://github.com/cb-agr/agriPlot/blob/main/Images/plot_bounds_qgis.png" alt="plot bounds in QGIS" height=400px>
+</p>
 
-### Additional examples and geospatial analysis: 
+### Additional examples and geospatial analysis
 
 The following examples demonstrate how you can utilize your fieldBoundary or encloseVarBoundaries as a masking layer to extract information from a raster dataset. In this instance, we'll be using an EC (i.e. apparent soil electrical conductivity) map* for a field as our input raster. However, any raster dataset (e.g. NDVI, yield map, etc.) could be used.
 
@@ -542,7 +577,9 @@ plot(myECD,axes=TRUE)
 title("EC Deep (mS/m)")
 ```
 
+<p align="center">
 <img src="https://github.com/cb-agr/agriPlot/blob/main/Images/ec_deep_map.png" alt="EC Deep Map" height=500px>
+</p>
 
 Add boundary for fieldBook (i.e. output from fieldBoundary):
 
@@ -550,7 +587,9 @@ Add boundary for fieldBook (i.e. output from fieldBoundary):
 plot(myFieldBoundary,add=TRUE)
 ```
 
+<p align="center">
 <img src="https://github.com/cb-agr/agriPlot/blob/main/Images/ec_deep_w_field_boundary.png" alt="EC Deep with field boundary" height=500px>
+</p>
 
 Mask raster with field boundary layer:
 
@@ -560,7 +599,9 @@ plot(fieldMask,axes=TRUE)
 plot(myBounds,add=TRUE)
 ```
 
+<p align="center">
 <img src="https://github.com/cb-agr/agriPlot/blob/main/Images/my_boundary_ec_mask.png" alt="EC Mask Layer" height=500px>
+</p>
 
 ```R
 plot(myTests,asp=-1,axes=TRUE)
@@ -572,7 +613,9 @@ title("EC Deep (mS/m) and Field Tests")
 
 In this figure we have individual test boundaries overlayed on our EC Deep map. More than anything, it's a nice soil EC map that displays spatial variability across a field trial. If you had drone NDVI imagery, the same steps/concept would apply here as well:
 
+<p align="center">
 <img src="https://github.com/cb-agr/agriPlot/blob/main/Images/ec_mask_with_test_blocks.png" alt="Mask Layer with test blocks" height=500px>
+</p>
 
 **Make a raster plot with yield data**
 
@@ -593,6 +636,8 @@ plot(YieldRas)
 title("Yield Raster (Bu/A)")
 ```
 
+<p align="center">
 <img src="https://github.com/cb-agr/agriPlot/blob/main/Images/raster_yield_plot.png" alt="Yield Raster Plot" height=500px>
+</p>
 
 *EC Data from: Application of Manifold GIS Software for Precision Agriculture Viacheslav I. Adamchuk and Abbas Hemmat 
