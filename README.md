@@ -48,7 +48,7 @@ plotColumnNum: contains your fieldbook column numbers associated with each respe
 
 plotRows: this is the number of rows per plot. This might be a 2-row, 4-row or 6-row plot, etc. A fieldBook can have multiple plotRows. 
 
-testName: corresponding name of the test associated with the plot you're evaluating. Please don't allow for any whitespace in the testName. Can be numeric, character or alphanumeric. 
+testName: corresponding name of the test associated with the plot you're evaluating. Please don't allow for whitespace in the testName. Can be numeric, character or alphanumeric. 
 
 repNum: the replication number associated with the testName (i.e. 1,2,3). Must be an integer. 
 
