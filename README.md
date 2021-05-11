@@ -397,7 +397,7 @@ Example using other CRS:
 myfbSPDF <- fbLLToSPDF(my2021FBLL,coordRefSys="EPSG:3857") # WGS84 / Psuedo-Mercator
 ```
 
-#### fieldBoundary
+### fieldBoundary
 
 **Description**
 
@@ -466,7 +466,7 @@ The figure below is the vector shapefile output in QGIS. Further uses might incl
 **Usage**
 
 ```R
-encloseVarBoundaries(fieldBookLLSPDF,feature)
+encloseVarBoundaries(fieldBookLLSPDF,variable)
 ```
 
 **Description**
@@ -527,14 +527,14 @@ Displaying a plot as one point has some shortcommings because it doesn't account
 **Usage**
 
 ```R
-agriPlotDim(fieldBookLL,buffer)
+agriPlotDim(fieldBookLL,dim)
 ```
 
 **Arguments**
 
 fieldBookLL: fieldbook output from agriPlot with longitude and latitude for each plot
 
-buffer: plot dimension multiplier from 0 < 1. You can think of this as how much of the plot dimensions do you want to include. A value of 1 would be the entire plot dimensions. I might recommend using 0.8 to roughly account for the alley space of a plot. 
+dim: plot dimension multiplier from 0 < 1. You can think of this as how much of the plot dimensions do you want to include. A value of 1 would be the entire plot dimensions. I might recommend using 0.8 to roughly account for the alley space of a plot. 
 
 **Examples**
 
