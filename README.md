@@ -96,7 +96,7 @@ The first two letters before the hyphen represent the column direction in which 
 - EW-NS – column numbers increase from East to West and row numbers increase from North to South
 
 <p align="center">
-<img src="https://github.com/cb-agr/agriPlot/blob/main/Images/ew_sn_agriplot.svg" alt="EW-SN" width=500px height=500px>
+<img src="https://github.com/cb-agr/agriPlot/blob/main/Images/ew_sn_agriplot.svg" alt="EW-SN" width=400px height=400px>
 </p>
 
 plantingAngle: The angle you planted at. Values greater than 0 rotate your field in a counterclockwise direction and values less than 0 rotate your field in a clockwise direction. If you planted "perfectly" vertical or horizontal then your plantingAngle is 0. I recommend using calcPlantingAngle to find your planting angle if you don't know it.
