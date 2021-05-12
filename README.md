@@ -208,10 +208,15 @@ agriDemoPlot(fieldBook,initialLong,initialLat,rowSpacing,plotLength,rowColDir,pl
 **Examples**
 
 ```R
+calcPlantingAngle(c(-96.4111795,41.1562046),c(-96.4121111,41.1576686),"ccw","N/S")
 demoFBList <- list(A=demoFieldBook(1,50,1,6,2),B=demoFieldBook(1,50,7,12,4),C=demoFieldBook(1,50,13,18,2))
 demoFB <- do.call(rbind,demoFBList)
-demoFBLL <- agriDemoPlot(demoFB,-98.13135,40.89407,0.762,4,"SN-WE",0)
+demoFBLL <- agriDemoPlot(demoFB,-96.4111759,41.1562150,0.762,4,"SN-WE",32.47018 )
 ```
+
+<p align="center">
+<img src="https://github.com/cb-agr/agriPlot/blob/main/Images/demoFBAnlge.png" alt="Demo Field Book" width=500px>
+</p>
 
 ### plotLeaflet
 

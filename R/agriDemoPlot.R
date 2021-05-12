@@ -159,7 +159,7 @@ agriDemoPlot <- function(fieldBook,initialLong,initialLat,rowSpacing,plotLength,
   }
  ######## long/lat calculations end##############
   
-  fbOut
+  return(fbOut)
   
 }
 
