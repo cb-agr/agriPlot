@@ -456,17 +456,44 @@ The figure below is the vector shapefile output in QGIS. Further uses might incl
 <img src="https://github.com/cb-agr/agriPlot/blob/main/Images/field_boundaries.png" alt="field boundary in QGIS" height=300px>
 </p>
 
+### fbSPDFRemoveBorder
+
+**Description**
+
+This function takes a fieldBookLLSPDF and removes border or filler from the testName variable.
+
+**Usage**
+
+```R
+fbSPDFRemoveBorder(fieldBookLLSPDF,borderName)
+```
+
+**Arguments**
+
+fieldBookLLSPDF: fieldBook as Spatial Points Data Frame
+
+borderName: name of border as described in testName
+
+**Examples**
+
+```R
+myFB <- read.csv("agriPlot_fb_sample.csv")
+myFBLL <- agriPlot(myFB,-96.4106204,41.1467745,0.762,4,0,"SN-WE")
+fbSPDF <- fieldBookLLToSPDF(myFBLL, coordRefSys = "default")
+SPDFNoBorder <- fbSPDFRemoveBorder(fbSPDF,"Border")
+```
+
 ### encloseVarBoundaries
+
+**Description**
+
+This function computes a polygon boundary that encloses each unique variable  (i.e. testNoRep or block). Simply put, if you want a polygon boundary for each variable associated with a specific header name, this is the function to do it. You can use it to "block" each testNoRep. The output of this function is a SpatialPolygonsDataFrame. The names features of the SpatialPolygonsDataFrame are called "blocks".
 
 **Usage**
 
 ```R
 encloseVarBoundaries(fieldBookLLSPDF,variable)
 ```
-
-**Description**
-
-This function computes a polygon boundary that encloses each unique variable  (i.e. testNoRep or block). Simply put, if you want a polygon boundary for each variable associated with a specific header name, this is the function to do it. The output of this function is a SpatialPolygonsDataFrame. The names features of the SpatialPolygonsDataFrame are called "blocks".
 
 **Libraries**
 
@@ -490,14 +517,14 @@ Below we'll use "agriPLot_fb_sample.csv" as an example to further demonstrate th
 myFb <- read.csv("agriPLot_fb_sample.csv")
 myFBLL <- agriPlot(sample,-96.4944759,41.1636251,0.762,4,"SN-WE",0)
 mySPDF <- fbLLToSPDF(myFBLL,"default")
-#important step: remove filler/border plots!!!
+#important step: remove filler/border plots!!! If border isn't removed you could have weird looking polygons
 mySPDFNoB <- fbSPDFRemoveBorder(mySPDF,"Border")
-myTests <- encloseVarBoundaries(mySPDFNoB,"testNameRep") #bound with "testNoRep"
+myTests <- encloseVarBoundaries(mySPDFNoB,"testNameRep") #enclose with "testNoRep"
 #write shapefile
 shapefile(myTests,"myTests")
 #plot result in R
 plot(myTests, asp=-1,axes=TRUE)
-#Note! In order to add text to the map you must use "blocks"
+#Note! In order to add text to the map you must use "blocks"!!!
 text(myTests,"blocks",cex=0.5)
 ```
 
