@@ -460,7 +460,7 @@ The figure below is the vector shapefile output in QGIS. Further uses might incl
 
 **Description**
 
-This function takes a fieldBookLLSPDF and removes border or filler from the testName variable.
+This function takes a fieldBookLLSPDF and removes border or filler plots from the testName variable.
 
 **Usage**
 
