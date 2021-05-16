@@ -8,5 +8,5 @@ Description: The core R function of agriPlot (i.e. agriPlot) takes a fieldbook t
 License: MIT
 Imports: data.table, plyr, leaflet, foreach, raster, sp, rgeos
 Encoding: UTF-8
-LazyData: false
+LazyData: true
 URL: https://github.com/cb-agr/agriPlot

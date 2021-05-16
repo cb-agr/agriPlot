@@ -4,5 +4,5 @@ importFrom("raster", "pointDistance")
 importFrom("rgeos", "gEnvelope", "gConvexHull")
 importFrom("data.table", "as.data.table") 
 importFrom("foreach", "foreach", "%do%") 
-importFrom("leaflet", "addProviderTiles", "addCircleMarkers", "addMeasure") X
+importFrom("leaflet", "addProviderTiles", "addCircleMarkers", "addMeasure") 
 importFrom("plyr", "join", "ddply") 
