@@ -1,0 +1,8 @@
+export(agriDemoPlot,agriPlot,agriPlotDim,calcPlantingAngle,demoFieldBook,encloseVarBoundaries,fbLLArea,fbLLToSPDF,fbSPDFRemoveBorder,fieldBoundary,findIntersectingPlots,pivotTracksLL,plotLeaflet)
+importFrom("sp", "Polygons","Polygon","SpatialPolygonsDataFrame","SpatialPolygons","SpatialPointsDataFrame", "proj4string")
+importFrom("raster", "pointDistance") 
+importFrom("rgeos", "gEnvelope", "gConvexHull")
+importFrom("data.table", "as.data.table") 
+importFrom("foreach", "foreach", "%do%") 
+importFrom("leaflet", "addProviderTiles", "addCircleMarkers", "addMeasure") X
+importFrom("plyr", "join", "ddply") 
