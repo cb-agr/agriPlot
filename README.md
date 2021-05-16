@@ -209,7 +209,7 @@ demoFB <- do.call(rbind,demoFBList)
 
 **Description**
 
-agriDemoplot is virtually the same function as agriPlot, however, it's only meant to take a fieldBook generated from demoFieldBook as input. agriDemoPlot can take the output from demoFieldBook as is. 
+agriDemoPlot is virtually the same function as agriPlot, however, it's only meant to take a fieldBook generated from demoFieldBook as input. agriDemoPlot can take the output from demoFieldBook as is. 
 
 **Libraries**
 
