@@ -20,12 +20,12 @@ The analysis performed by all the functions is accurate. However, when using thi
 ### R package dependencies 
 
 - [sp](https://cran.r-project.org/web/packages/sp/index.html)
-- raster(https://cran.r-project.org/web/packages/raster/index.html)
-- rgeos(https://cran.r-project.org/web/packages/rgeos/index.html)
-- data.table(https://cran.r-project.org/web/packages/data.table/index.html)
-- foreach(https://www.rdocumentation.org/packages/foreach/versions/1.5.1/topics/foreach)
-- leaflet(https://cran.r-project.org/web/packages/leaflet/index.html)
-- plyr(https://cran.r-project.org/web/packages/plyr/index.html)
+- [raster](https://cran.r-project.org/web/packages/raster/index.html)
+- [rgeos](https://cran.r-project.org/web/packages/rgeos/index.html)
+- [data.table](https://cran.r-project.org/web/packages/data.table/index.html)
+- [foreach](https://www.rdocumentation.org/packages/foreach/versions/1.5.1/topics/foreach)
+- [leaflet](https://cran.r-project.org/web/packages/leaflet/index.html)
+- [plyr](https://cran.r-project.org/web/packages/plyr/index.html)
 
 ### installation with [devtools](https://github.com/hadley/devtools)
 
