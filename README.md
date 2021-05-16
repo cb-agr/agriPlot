@@ -41,7 +41,7 @@ Primary Workflow
 
 ### fieldBook input
 
-Your fieldbook input can have any number of attributes but there are a handful of header names that are **essential** for agriPlot to work. Please see **agriPlot_fb_sample.csv** as an example fieldbook in the **Sample_data** folder. 
+Your fieldBook input can have any number of attributes but there are a handful of header names that are **essential** for agriPlot to work. Please see **agriPlot_fb_sample.csv** as an example fieldbook in the **Sample_data** folder. 
 
 plotRowNum: contains your fieldbook row numbers associated with each respective plot. Must be an integer.
 
