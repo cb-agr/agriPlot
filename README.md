@@ -536,7 +536,7 @@ myFBLL <- agriPlot(sample,-96.4944759,41.1636251,0.762,4,"SN-WE",0)
 mySPDF <- fbLLToSPDF(myFBLL,"default")
 #important step: remove filler/border plots!!! If border isn't removed you could have weird looking polygons
 mySPDFNoB <- fbSPDFRemoveBorder(mySPDF,"Border")
-myTests <- encloseVarBoundaries(mySPDFNoB,"testNameRep") #enclose with "testNoRep"
+myTests <- encloseVarBoundaries(mySPDFNoB,"testNameRep") #enclose with "testNameRep"
 #write shapefile
 shapefile(myTests,"myTests")
 #plot result in R
