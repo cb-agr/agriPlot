@@ -15,6 +15,22 @@ A fieldbook represents some agricultural field research experiment wherein the r
 
 The analysis performed by all the functions is accurate. However, when using this program, it should be important that results are ground-truthed before final implementation of a field trial design.
 
+## Installation
+
+### R package dependencies 
+
+- sp
+- raster
+- rgeos
+- data.table
+- foreach
+- leaflet
+- plyr
+
+### devtools installation
+
+devtools::install_github("cb-agr/agriPlot")
+
 ## Documentation
 
 Primary Workflow
