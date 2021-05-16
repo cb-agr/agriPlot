@@ -666,7 +666,7 @@ myFBLL <- agriPlot(fbYield,-96.4944759,41.1636251,0.762,4,"SN-WE",0)
 myFBLLSPDF <- fbLLToSPDF(myFBLL,"default")
 #remove border, it's just easier and you probably don't care about the yield anyways
 myFBLLSPDFNOB <- fbSPDFRemoveBorder(myFBLLSPDF,"Border")
-#this next steps generates a raster with empty cells and it's bounds are the myFBLLSPDF
+#the next step generates a raster with empty cells and it's bounds are the myFBLLSPDF
 #ncol and nrow is the number of columns and rows in your fieldbook
 r <- raster(myFBLLSPDFNOB, ncol=58,nrow=64, crs="+proj=utm +zone=18 +datum=WGS84 +units=m +no_defs")
 #rasterize Yield data 
