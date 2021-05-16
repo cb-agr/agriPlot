@@ -1,0 +1,12 @@
+Package: agriPlot
+Type: Package
+Title: agriPlot - an R package of practical geospatial tools for agricultural field research planning and basic analysis
+Version: 0.1
+Author: Chris Bach
+Maintainer: Chris Bach <ceb561@gmail.com>
+Description: The core R function of agriPlot (i.e. agriPlot) takes a fieldbook that is comprised of an agricultural research experiment and computes longitude and latitude coordinates for each individual plot. Once geographical coordinates are assigned to individual plots, the primary utility of agriPlot is to provide users with straight-forward functions for geospatial visualization and analyses of a field experiment. For instance, let's say you're planting a trial at a new site. agriPlot can help users vizualize various placements of a field trial to identify an ideal planting area and assess the spatial design. Additionally, users can generate a map to help ground truth field boundaries. agriPlot even has functions to help with more complicated tasks such as accurately planting border/filler in pivot tracks. To best visualize the various outputs of agriPlot, I highly recommend using open-source GIS software such as QGIS. agriPlot does NOT design agricultural field experiments. That’s left up to the user.
+License: MIT
+Imports: data.table, plyr, leaflet, foreach, raster, sp, rgeos
+Encoding: UTF-8
+LazyData: false
+URL: https://github.com/cb-agr/agriPlot
