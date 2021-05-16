@@ -213,6 +213,7 @@ demoFBList <- list(A=demoFieldBook(1,50,1,6,2),B=demoFieldBook(1,50,7,12,4),C=de
 demoFB <- do.call(rbind,demoFBList)
 demoFBLL <- agriDemoPlot(demoFB,-96.4111759,41.1562150,0.762,4,"SN-WE",32.47018 )
 ```
+Output fieldbook plotted using QGIS:
 
 <p align="center">
 <img src="https://github.com/cb-agr/agriPlot/blob/main/Images/demoFBAnlge.png" alt="Demo Field Book" width=500px>
@@ -460,7 +461,7 @@ The figure below is the vector shapefile output in QGIS. Further uses might incl
 
 **Description**
 
-This function takes a fieldBookLLSPDF and removes border or filler from the testName variable.
+This function takes a fieldBookLLSPDF and removes border or filler plots from the testName variable.
 
 **Usage**
 
