@@ -536,7 +536,7 @@ SPDFNoBorder <- fbSPDFRemoveBorder(fbSPDF,"Border")
 
 **Description**
 
-This function computes a polygon boundary that encloses each unique variable  (i.e. testNameRep or block). Simply put, if you want a polygon boundary for each variable associated with a specific header name, this is the function to do it. You can use it to make polygon boundaries for each testNoRep. The output of this function is a SpatialPolygonsDataFrame. The names features of the SpatialPolygonsDataFrame are called "blocks".
+This function computes a polygon boundary that encloses each unique variable  (i.e. testNameRep or block). Simply put, if you want a polygon boundary for each variable associated with a specific header name, this is the function to do it. You can use it to make polygon boundaries for each testNameRep. The output of this function is a SpatialPolygonsDataFrame. The names features of the SpatialPolygonsDataFrame are called "blocks".
 
 **Usage**
 
