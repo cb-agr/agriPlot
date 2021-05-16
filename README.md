@@ -94,10 +94,10 @@ rowColDir: this is the row and column orientation of your field.This is probably
 For North/South plantings:
 The first two letters before the hyphen represent the row direction in which your row numbers are increasing. The second two letters following the hyphen represent represent the column direction in which your column numbers are increasing. There are one of four North/South planting inputs to choose from.
 
-- SN-WE – row numbers increase from South to North and column numbers increase from West to East
-- SN-EW – row numbers increase from South to North and column numbers increase from East to West
-- NS-WE – row numbers increase from North to South and column numbers increase from West to East
-- NS-EW – row numbers increase from North to South and column numbers increase from East to West
+- "SN-WE" – row numbers increase from South to North and column numbers increase from West to East
+- "SN-EW" – row numbers increase from South to North and column numbers increase from East to West
+- "NS-WE" – row numbers increase from North to South and column numbers increase from West to East
+- "NS-EW" – row numbers increase from North to South and column numbers increase from East to West
 
 <p align="center">
 <img src="https://github.com/cb-agr/agriPlot/blob/main/Images/row_col_SNWE.svg" alt="SN-WE" width=400px height=400px>
@@ -106,10 +106,10 @@ The first two letters before the hyphen represent the row direction in which you
 For East/West plantings:
 The first two letters before the hyphen represent the column direction in which your column numbers are increasing. The second two letters following the hyphen represent represents the row direction in which your row numbers are increasing. The are one of four East/West inputs to choose from.
 
-- WE-SN – column numbers increase from West to East and row numbers increase from South to North
-- WE-NS – column numbers increase from West to East and row numbers increase from North to South
-- EW-SN – column numbers increase from East to West and row numbers increase from South to North
-- EW-NS – column numbers increase from East to West and row numbers increase from North to South
+- "WE-SN" – column numbers increase from West to East and row numbers increase from South to North
+- "WE-NS" – column numbers increase from West to East and row numbers increase from North to South
+- "EW-SN" – column numbers increase from East to West and row numbers increase from South to North
+- "EW-NS" – column numbers increase from East to West and row numbers increase from North to South
 
 <p align="center">
 <img src="https://github.com/cb-agr/agriPlot/blob/main/Images/ew_sn_agriplot.svg" alt="EW-SN" width=400px height=400px>
@@ -144,9 +144,9 @@ calcPlantingAngle(LongLat1,LongLat2,rotation,plantingDir)
 
 **Arguments**
 
-LongLat1: this is the initial longitude and latitude of where you plan to begin planting. Values should be stored as c(-98.1878745,40.8915224).
+LongLat1: this is the initial longitude and latitude of where you plan to begin planting. Argument should be stored as c(-98.1878745,40.8915224).
 
-LongLat2: the is the terminal longitude and latitude for where your first planting row will end. Values should be stored as c(-98.1878745,40.8915224).
+LongLat2: the is the terminal longitude and latitude for where your first planting row will end. Argument should be stored as c(-98.1878745,40.8915224).
 
 rotation: direction you will be rotating field. There are one of two inputs to select from (arguments must be in quotes):
 
@@ -209,17 +209,49 @@ demoFB <- do.call(rbind,demoFBList)
 
 **Description**
 
-agriDemoplot is virtually the same function as agriPlot, however, it's only meant to take a fieldbook generated from demoFieldBook as input. agriDemoplot can take the output from demoFieldBook as is. To limit redundancy in the README please refer agriPlot for explaination of the agruments. 
+agriDemoplot is virtually the same function as agriPlot, however, it's only meant to take a fieldBook generated from demoFieldBook as input. agriDemoPlot can take the output from demoFieldBook as is. 
 
 **Libraries**
 
-library(data.table)
+library(data.table), library(plyr)
 
 **Usage**
 
 ```R
-agriDemoPlot(fieldBook,initialLong,initialLat,rowSpacing,plotLength,rowColDir,plantingAngle)
+agriDemoPlot(demoFieldBook,initialLong,initialLat,rowSpacing,plotLength,rowColDir,plantingAngle)
 ```
+
+**Arguments**
+
+demoFieldBook: "demo" fieldBook generated from demoFieldBook.
+
+initialLong: the Longitude for the plot in column 1 and row 1.
+
+initialLat: the Latitude for the plot in column 1 and row 1.
+
+rowSpacing: this is the row spacing of your planter in **meters** (15 inch planter spacing = 0.381 meters, 30 inch planter spacing = 0.762 meters).
+
+plotLength: this is the **total** length of your plot in **meters**. This includes the planted portion of the plot and the alley (if an alley is applicable).
+
+rowColDir: this is the row and column orientation of your field.This is probably the most confusing part of the function, but let me explain.
+
+For North/South plantings:
+The first two letters before the hyphen represent the row direction in which your row numbers are increasing. The second two letters following the hyphen represent represent the column direction in which your column numbers are increasing. There are one of four North/South planting inputs to choose from.
+
+- "SN-WE" – row numbers increase from South to North and column numbers increase from West to East
+- "SN-EW" – row numbers increase from South to North and column numbers increase from East to West
+- "NS-WE" – row numbers increase from North to South and column numbers increase from West to East
+- "NS-EW" – row numbers increase from North to South and column numbers increase from East to West
+
+For East/West plantings:
+The first two letters before the hyphen represent the column direction in which your column numbers are increasing. The second two letters following the hyphen represent represents the row direction in which your row numbers are increasing. The are one of four East/West inputs to choose from.
+
+- "WE-SN" – column numbers increase from West to East and row numbers increase from South to North
+- "WE-NS" – column numbers increase from West to East and row numbers increase from North to South
+- "EW-SN" – column numbers increase from East to West and row numbers increase from South to North
+- "EW-NS" – column numbers increase from East to West and row numbers increase from North to South
+
+plantingAngle: The angle you planted at. Values greater than 0 rotate your field in a counterclockwise direction and values less than 0 rotate your field in a clockwise direction. If you planted "perfectly" vertical or horizontal then your plantingAngle is 0. I recommend using calcPlantingAngle to find your planting angle if you don't know it.
 
 **Examples**
 
