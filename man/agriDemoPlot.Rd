@@ -7,11 +7,11 @@
   agriDemoplot is virtually the same function as agriPlot, however, it's only meant to take a fieldbook generated from demoFieldBook as input. agriDemoplot can take the output from demoFieldBook as is. 
 }
 \usage{
-  agriDemoPlot(fieldBook,initialLong,initialLat,rowSpacing,plotLength,rowColDir,plantingAngle)
+  agriDemoPlot(demoFieldBook,initialLong,initialLat,rowSpacing,plotLength,rowColDir,plantingAngle)
 }
 \arguments{
-    \item{fieldBook}{
-    fieldBook representing agricultural field experiment. Must have necessary header names. either data.frame or data.table.
+    \item{demoFieldBook}{
+    "demo" fieldBook generated from demoFieldBook.  
   } 
   \item{initialLong}{
     The Longitude for the plot in column 1 and row 1
@@ -33,7 +33,7 @@
   }
 }
 \details{
-   The function returns latitude and longitude coordinate for each plot represented in a demoFieldBook.
+   The function returns latitude and longitude coordinates for each plot represented in a demoFieldBook.
 }
 \value{
   returns a demoFieldBook with lat/long for each plot 
