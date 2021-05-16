@@ -1,11 +1,11 @@
 
 # agriPlot <img src= https://github.com/cb-agr/agriPlot/blob/main/Images/plotsNS.png alt="N/S Plots" height=40px> <img src=https://github.com/cb-agr/agriPlot/blob/main/Images/plotsEW.png alt="E/W Plots" height=30px>
 
-agriPlot is a suite of practical geospatial tools for agricultural field research planning and analysis
+agriPlot is a suite of practical geospatial tools for agricultural field research planning and basic analysis
 
 ## What is agriPlot?
 
-The core R function of agriPlot (i.e. agriPlot) takes a fieldbook that is comprised of an agricultural research experiment and computes longitude and latitude coordinates for each individual plot. Once geographical coordinates are assigned to individual plots, the primary utility of agriPlot is to provide users with straight-forward functions for geospatial visualization and analyses of a field experiment. For instance, let's say you're planting a trial at a new site. agriPlot can help users vizualize various placements of a field trial to identify an ideal planting area and assess the spatial design. Additionally, users can generate a map to help ground truth field boundaries. agriPlot even has functions to help with more complicated tasks such as accurately planting border/filler in pivot tracks. To best visualize the various outputs of agriPlot, I highly recommend using open-source GIS software such as QGIS. agriPlot does **NOT** design agricultural field experiments. That’s left up to the user.
+The core R function of agriPlot (i.e. agriPlot) takes a fieldbook that is comprised of an agricultural research experiment and computes longitude and latitude coordinates for each individual plot. Once geographical coordinates are assigned to individual plots, the primary utility of agriPlot is to provide users with straight-forward functions for geospatial visualization and analyses of a field experiment. For instance, let's say you're planting a trial at a new site. agriPlot can help users vizualize various placements of a field trial to identify an ideal planting area and assess the spatial design. Additionally, users can generate a map to help ground truth field boundaries. agriPlot even has functions to help with more complicated tasks such as accurately planting border/filler in pivot tracks. To best visualize the various outputs of agriPlot, I highly recommend using open-source GIS software such as QGIS. agriPlot is written entirely in R (along with some R package dependencies) and is easy to install using [devtools](https://github.com/hadley/devtools). agriPlot does **NOT** design agricultural field experiments. That’s left up to the user.
 
 ## What is a fieldbook?
 
@@ -27,7 +27,7 @@ The analysis performed by all the functions is accurate. However, when using thi
 - [leaflet](https://cran.r-project.org/web/packages/leaflet/index.html)
 - [plyr](https://cran.r-project.org/web/packages/plyr/index.html)
 
-### installation with [devtools](https://github.com/hadley/devtools)
+### Installation with [devtools](https://github.com/hadley/devtools)
 
 devtools::install_github("cb-agr/agriPlot")
 
