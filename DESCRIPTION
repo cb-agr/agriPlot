@@ -1,6 +1,6 @@
 Package: agriPlot
 Type: Package
-Title: agriPlot - an R package of practical geospatial tools for agricultural field research planning and basic analysis
+Title: agriPlot - Practical geospatial tools for agricultural field research planning and basic analysis
 Version: 0.1
 Author: Chris Bach
 Maintainer: Chris Bach <ceb561@gmail.com>
