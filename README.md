@@ -168,7 +168,7 @@ calcPlantingAngle(c(-98.1878745,40.8915224),c(-98.1846696,40.8909628),"cw","E/W"
 
 **Description**
 
-Generates a simple "demo" fieldbook from a specified number of rows, columns and plot rows. In 	some instances a user may not have a fieldbook quite yet prepared for the season but still may want the option for a preliminary visualization their field trial layout. The output of this function is only intended to be used with agriDemoplot (explained after this function).
+Generates a simple "demo" fieldbook from a specified number of rows, columns and plot rows. In 	some instances a user may not have a fieldbook quite yet prepared for the season but still may want the option for a preliminary visualization their field trial layout. The output of this function is only intended to be used with agriDemoPlot (explained after this function).
 
 **Libraries**
 
@@ -318,11 +318,11 @@ pivotTracksLL(radin, cpLong, cpLat)
 
 **Arguments**
 
-radin: is the radius of each pivot track in **meters**. Values can be stored using e.g.: c(54.577,103.475,152.119,200.906,263.136,325.574,387.55) where each comma separated value represents a track radius. Radius measurements for radin should be taken as close as possible to the center of the pivot stop and to the end of each respective track. 
+radin: is the radius of each pivot track in **meters**. Values can be stored using e.g.: c(54.577,103.475,152.119,200.906,263.136,325.574,387.55) where each comma separated value represents a track radius. Radius measurements for radin should be taken as close as possible to the center of the pivot and to the end of each respective track. 
 
-cpLong: This is longitude coordinate for the center pivot. Should be taken right at the very center of the pivot stop. 
+cpLong: This is longitude coordinate for the center pivot. Should be taken right at the very center of the pivot. 
 
-cpLat: This is latitude coordinate for the center pivot. Should be taken right at the very center of the pivot stop.
+cpLat: This is latitude coordinate for the center pivot. Should be taken right at the very center of the pivot.
 
 **Examples**
 
@@ -693,7 +693,7 @@ In this figure we have individual test boundaries overlayed on our EC Deep map. 
 Let's say it is the end of the season and you have yield values for all of your plots. We can rasterize the yield data to make a simple yield map of the field. By rasterizing the dataset we're taking discrete point values, in this case yield, and converting it to a continuous geospatial value. I'll be using the file agriPLot_fb_samplev2_yield.csv as an example. A map like this is probably only useful for visualization of any spatial variability in the field. For instance, maybe you had a pest or weed issue or poor irrigation uniformity and wanted to see if these events contributed to any broad spatial differences in yield across the field.  
 
 ```R
-fbYield <- read.csv("agriPLot_fb_samplev2_yield.csv")
+fbYield <- read.csv("agriPLot_fb_sample_yield.csv")
 myFBLL <- agriPlot(fbYield,-96.4944759,41.1636251,0.762,4,"SN-WE",0)
 myFBLLSPDF <- fbLLToSPDF(myFBLL,"default")
 #remove border, it's just easier and you probably don't care about the yield anyways
