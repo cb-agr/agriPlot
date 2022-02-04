@@ -368,7 +368,7 @@ Basic usage:
 fbLLintersection <- findIntersectingPlots(fbLL,pivotLL,3)
 ```
 
-For starters, any set of pointsofInterest can be used. But in the following example we'll demonstrate how to use the function to find plots that intersect with pivot tracks. This is useful for mapping border plots into pivot tracks. **Note, if you shift your field trial in any direction, you need to be aware that plot intersections may change as well!!!** So if you're doing this in practice you should add a little extra border in pivot tracks based on the intersections for good measure to allow for any minor adjustments during planting. 
+For starters, any set of pointsofInterest can be used. But in the following example we'll demonstrate how to use the function to find plots that intersect with pivot tracks. This is useful for mapping border plots into pivot tracks. **Note, if you shift your field trial in any direction, you need to be aware that plot intersections may change as well!!!** So if you're doing this in practice you should add a little extra border in pivot tracks based on the intersections for good measure to allow for any minor adjustments during planting. To test this in practice, you can do a demo run with your planter (with no seed) to see if the row/range counter matches up with the filler to be planted in the pivot track.
 
 ```R
 myFB <- read.csv("agriPlot_fb_sample.csv")
