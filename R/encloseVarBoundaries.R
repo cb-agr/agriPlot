@@ -11,5 +11,5 @@ fieldBookLLSPDFChull <- mapply(fieldBookLLSPDFChull, names(fieldBookLLSPDFChull)
                                return(x)})
 fieldBookLLSPDFChull <- do.call(rbind,fieldBookLLSPDFChull)
 fbToChullSPDF <- SpatialPolygonsDataFrame(fieldBookLLSPDFChull, data.frame(blocks = names(fieldBookLLSPDFChull)),match.ID = FALSE)
-return(fieldBookLLSPDFSplit)
+return(fbToChullSPDF)
 }
