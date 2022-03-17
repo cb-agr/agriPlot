@@ -4,7 +4,7 @@
 encloseVarBoundaries <- function(fieldBookLLSPDF,blocking){
 fieldBookLLSPDF <- fieldBookLLSPDF
 myBlocks <- blocking
-fieldBookLLSPDFSplit <- split(fieldBookLLSPDF,fieldBookLLSPDF[[myBlocks]], drop=FALSE)
+fieldBookLLSPDFSplit <- base::split(fieldBookLLSPDF,fieldBookLLSPDF[[myBlocks]], drop=FALSE)
 #fieldBookLLSPDFChull <- lapply(fieldBookLLSPDFSplit, function(x){rgeos::gConvexHull(x)}) 
 #fieldBookLLSPDFChull <- mapply(fieldBookLLSPDFChull, names(fieldBookLLSPDFChull), SIMPLIFY = FALSE,
                              #  FUN = function(x,y){x@polygons[[1]]@ID <- y
