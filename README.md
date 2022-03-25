@@ -546,7 +546,7 @@ encloseVarBoundaries(fieldBookLLSPDF,variable)
 
 **Libraries**
 
-library(sp), library(rgeos)
+library(sp), library(rgeos), library(raster)
 
 **Arguments**
 
