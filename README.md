@@ -374,7 +374,7 @@ For starters, any set of pointsofInterest can be used. But in the following exam
 myFB <- read.csv("agriPlot_fb_sample.csv")
 myFBLL <- agriPlot(myFB,-96.4535927,41.1819774,0.762,4,"SN-WE",0)
 pivLL <- pivotTracksLL(c(55,109.5,163.249,217.919,272.5,326.718),-96.45504366,41.18194751)
-myInt <- pivotPlotsIntersection(myFBLL,pivLL,3)
+myInt <- findIntersectingPlots(myFBLL,pivLL,3)
 ```
 
 Pivot tracks (in green), fieldBook plots (in brown) and plots intersecting with pivot tracks (in red):
