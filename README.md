@@ -469,7 +469,7 @@ fbBoundary <- fieldBoundary(fbSPDF)
 
 ```R
 myFB <- read.csv("agriPlot_fb_sample.csv")
-myFBLL <- agriPlot(myFB,-96.4106204,41.1467745,0.762,4,0,"SN-WE")
+myFBLL <- agriPlot(myFB,-96.4106204,41.1467745,0.762,4,"SN-WE",0)
 fbSPDF <- fieldBookLLToSPDF(myFBLL, coordRefSys = "default")
 fbBoundary <- fieldBoundary(fbSPDF)
 #write shapefile
@@ -690,7 +690,7 @@ In this figure we have individual test boundaries overlayed on our EC Deep map. 
 
 **Make a raster plot with yield data**
 
-Let's say it is the end of the season and you have yield values for all of your plots. We can rasterize the yield data to make a simple yield map of the field. By rasterizing the dataset we're taking discrete point values, in this case yield, and converting it to a continuous geospatial value. I'll be using the file agriPLot_fb_samplev2_yield.csv as an example. A map like this is probably only useful for visualization of any spatial variability in the field. For instance, maybe you had a pest or weed issue or poor irrigation uniformity and wanted to see if these events contributed to any broad spatial differences in yield across the field.  
+Let's say it is the end of the season and you have yield values for all of your plots. We can rasterize the yield data to make a simple yield map of the field. By rasterizing the dataset we're taking discrete point values, in this case yield, and converting it to a continuous geospatial value. I'll be using the file agriPLot_fb_sample_yield.csv as an example. A map like this is probably only useful for visualization of any spatial variability in the field. For instance, maybe you had a pest or weed issue or poor irrigation uniformity and wanted to see if these events contributed to any broad spatial differences in yield across the field.  
 
 ```R
 fbYield <- read.csv("agriPLot_fb_sample_yield.csv")
